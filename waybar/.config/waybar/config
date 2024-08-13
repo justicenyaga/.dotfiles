@@ -1,0 +1,23 @@
+{
+  "output": "HDMI-A-1",
+  "margin-top" : 10,
+  "margin-left": 10,
+  "margin-right": 10,
+  "height" : 35,
+  "include": [
+    "~/.config/waybar/modules.json"
+  ],
+  "modules-left": [
+    "custom/app-launcher",
+    "custom/dots",
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "clock",
+  ],
+  "modules-right": [
+    "network",
+    "group/group3"
+    // "custom/power-menu"
+  ],
+}

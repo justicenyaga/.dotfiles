@@ -1,0 +1,126 @@
+@import "colors.css";
+
+* {
+  font-family: "Cascadia Mono", "JetBrainsMono Nerd Font", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 16px;
+}
+
+window#waybar {
+  background-color: rgba(0, 0, 0, 0);
+  color: @fg;
+  transition-duration: 0.5s;
+  transition-property: background-color;
+}
+
+.modules-left,
+.modules-center {
+  border: 3px solid @border;
+  background-color: @bg;
+  border-radius: 25px;
+  padding: 0 20px;
+}
+
+#custom-app-launcher {
+  color: @blue-arch;
+  border-radius: 20px;
+  margin: 0px 5px 0px 5px;
+}
+
+#custom-dots {
+  font-size: 18px;
+  color: @blue-arch;
+  margin: 0px 0px 0px 10px;
+}
+
+#workspaces button {
+  color: @cyan;
+}
+
+#workspaces button:hover {
+  background: inherit;
+  color: @fg;
+}
+
+#workspaces button.active {
+  color: @dark-orange;
+}
+
+#workspaces button.urgent {
+  color: @alert;
+}
+
+#group3,
+#group2,
+#group1,
+#tray {
+  border-radius: 25px;
+  padding-left: 18px;
+}
+
+#group3 {
+  background-color: @bg;
+  border: 3px solid @border;
+}
+
+#group2 {
+  background-color: @bg1;
+}
+
+#group1 {
+  background-color: @bg2;
+}
+
+#tray {
+  background-color: @bg3;
+  margin-right: -2px;
+}
+
+#backlight,
+#pulseaudio,
+#battery,
+#power-profiles-daemon,
+#tray {
+  padding-right: 10px;
+}
+
+#network {
+  margin-right: 15px;
+}
+
+#backlight {
+  color: @gold;
+}
+
+#pulseaudio.muted {
+  color: @blue-gray;
+}
+
+#pulseaudio.bluetooth.muted {
+  color: @blue-gray;
+}
+
+#battery.charging {
+  color: @burnt-sienna;
+}
+
+@keyframes blink {
+  to {
+    color: @red;
+  }
+}
+
+#battery.critical:not(.charging) {
+  color: @fg;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#custom-power-menu {
+  color: @alert;
+  margin-right: 20px;
+  margin-left: 10px;
+}

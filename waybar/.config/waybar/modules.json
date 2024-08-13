@@ -1,0 +1,154 @@
+{
+  "custom/app-launcher": {
+    "format": "<span size='16000'></span>",
+    "on-click": "pgrep wofi >/dev/null 2>&1 && killall wofi || wofi --show drun",
+    "tooltip-format": "Application Launcher"
+  },
+  "custom/dots": {
+    "format": "󰇙"
+  },
+  "hyprland/workspaces": {
+    "format": "<span size='14000'>{icon}</span>",
+    "on-click": "activate",
+    "all-outputs": true,
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "󰕼",
+      "5": "",
+      "6": "",
+      "default": ""
+    },
+    "sort-by-number": true
+  },
+  "clock": {
+    "interval": 1,
+    "format": "<span size='14000' color='#7aa2f7'></span>  {:%a %d %b %H:%M:%S}",
+    "tooltip-format": "<tt><big>{calendar}</big></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 4,
+      "format": {
+        "months": "<span color='#1e90ff'><b>{}</b></span>",
+        "weekdays": "<span color='#00fa9a'><b>{}</b></span>",
+        "today": "<span background='#ff6347' color='#000000'><b>{}</b></span>"
+      }
+    },
+    "actions": {
+      "on-click": "mode",
+      "on-click-middle": "shift_reset",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+  "group/power": {
+    "orientation": "horizontal",
+    "modules": ["battery", "power-profiles-daemon"]
+  },
+  "group/group1": {
+    "orientation": "horizontal",
+    "modules": ["group/power", "tray"]
+  },
+  "group/group2": {
+    "orientation": "horizontal",
+    "modules": ["pulseaudio", "group/group1"]
+  },
+  "group/group3": {
+    "orientation": "horizontal",
+    "modules": ["backlight", "group/group2"]
+  },
+  "network": {
+    "interval": 1,
+    "format-wifi": "<span size='14000' color='#ffa500'></span>  {bandwidthDownBytes}",
+    "format-ethernet": "<span size='14000' color='#ffa500'></span>  {bandwidthDownBytes}",
+    "tooltip": false,
+    "format-disconnected": ""
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "<span size='18000'> {icon} </span>",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "scroll-step": 5,
+    "tooltip-format": "Brightness: {percent}%"
+  },
+  "pulseaudio": {
+    "max-volume": 150,
+    "scroll-step": 5,
+    "on-click": "pavucontrol",
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": "<span size='14000' color='#1e90ff'></span> {volume}%",
+    "format-bluetooth-muted": " Muted",
+    "format-muted": " Muted",
+    "format-icons": {
+      "hands-free": "󰋎",
+      "headphone": "<span color='#f4be49'></span>",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "<span color='#00ff7f'></span>",
+        "<span color='#00ff00'></span>",
+        "<span color='#7fff00'></span>",
+        "<span color='#b2ff66'></span>",
+        "<span color='#ffff66'></span>",
+        "<span color='#ffc300'></span>",
+        "<span color='#ff8c00'></span>",
+        "<span color='#ff5733'></span>",
+        "<span color='#ff0000'></span>"
+      ]
+    }
+  },
+  "battery": {
+    "full-at": 98,
+    "interval": 1,
+    "states": {
+      "critical": 15,
+      "warning": 30,
+      "minor": 40,
+      "moderate": 60,
+      "high": 80,
+      "good": 98,
+      "excelent": 100
+    },
+    "format": "<span size='14000'>{icon}</span> {capacity}%",
+    "format-full": "<span size='14000' color='#00ff7f'>󰁹</span> {capacity}%",
+    "format-charging-critical": "<span size='14000'>󰢟</span> {capacity}%",
+    "format-charging-warning": "<span size='14000'>󰂆</span> {capacity}%",
+    "format-charging-minor": "<span size='14000'>󰂇</span> {capacity}%",
+    "format-charging-moderate": "<span size='14000'>󰢝</span> {capacity}%",
+    "format-charging-high": "<span size='14000'>󰢞</span> {capacity}%",
+    "format-charging-good": "<span size='14000'>󰂋</span> {capacity}%",
+    "format-icons": {
+      "critical": "󰂃",
+      "warning": "<span color='#ff5733'>󰁺</span>",
+      "minor": "<span color='#ffc300'>󰁼</span>",
+      "moderate": "<span color='#b2ff66'>󰁾</span>",
+      "high": "<span color='#00ff00'>󰂀</span>",
+      "good": "<span color='#00ff7f'>󰂂</span>",
+      "excelent": "<span color='#00ff7f'>󰁹</span>"
+    }
+  },
+  "power-profiles-daemon": {
+    "format": "<span size='14000' color='#6c77bb'>{icon}</span>",
+    // TODO: Remove driver from the tooltip
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "format-icons": {
+      "default": " ",
+      "performance": " ",
+      "balanced": " ",
+      "power-saver": "<span size='18000'>󱈑</span>"
+    }
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 5,
+    "reverse-direction": true
+  },
+  "custom/power-menu": {
+    "format": "<span size='14000'>⏻</span>",
+    "on-click": "wlogout",
+    "tooltip-format": "Power Menu"
+  }
+}
