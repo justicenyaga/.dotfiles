@@ -1,61 +1,77 @@
+* {
+  background-image: none;
+  font-family: "Cascadia Mono";
+  font-size: 20px;
+}
+
+@import "colors.css";
+
 window {
-  font-family: "Cascadia Mono", monospace;
-  font-size: 12pt;
-  color: #cdd6f4;
-  background-color: rgba(17, 17, 27, 0.88);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 button {
+  color: @fg;
+  background-color: @bg;
+  outline-style: none;
+  border: none;
+  border-width: 0px;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 60%;
-  border: none;
-  color: #ced7f4;
+  background-size: 10%;
+  border-radius: 0px;
+  box-shadow: none;
   text-shadow: none;
-  border-radius: 20px 20px 20px 20px;
-  background-color: rgba(30, 30, 46, 0);
-  margin: 5px;
-  transition:
-    box-shadow 0.2s ease-in-out,
-    background-color 0.2s ease-in-out;
+  margin: 0px;
+}
+
+button:focus {
+  background-color: @active-bg;
+  background-size: 15%;
 }
 
 button:hover {
-  background-color: rgba(49, 50, 68, 0.1);
+  background-color: @hover-bg;
+  color: @hover-fg;
+  background-size: 15%;
+}
+
+button:hover#lock {
+  background-image: url("icons/lock_black.png");
+  margin-top: -30px;
+  margin-left: -30px;
+}
+
+button:hover#logout {
+  background-image: url("icons/logout_black.png");
+  margin-top: -30px;
+  margin-right: -30px;
+}
+
+button:hover#shutdown {
+  background-image: url("icons/shutdown_black.png");
+  margin-right: -30px;
+  margin-bottom: -30px;
+}
+
+button:hover#reboot {
+  background-image: url("icons/reboot_black.png");
+  margin-bottom: -30px;
+  margin-left: -30px;
 }
 
 #lock {
-  background-image: image(url("icons/lock.png"));
-  background-size: 70%;
-}
-#lock:focus {
-  background-image: image(url("icons/lock-hover.png"));
+  background-image: url("icons/lock.png");
 }
 
 #logout {
-  background-image: image(url("icons/logout.png"));
-}
-#logout:focus {
-  background-image: image(url("icons/logout-hover.png"));
-}
-
-#suspend {
-  background-image: image(url("icons/sleep.png"));
-}
-#suspend:focus {
-  background-image: image(url("icons/sleep-hover.png"));
+  background-image: url("icons/logout.png");
 }
 
 #shutdown {
-  background-image: image(url("icons/power.png"));
-}
-#shutdown:focus {
-  background-image: image(url("icons/power-hover.png"));
+  background-image: url("icons/shutdown.png");
 }
 
 #reboot {
-  background-image: image(url("icons/restart.png"));
-}
-#reboot:focus {
-  background-image: image(url("icons/restart-hover.png"));
+  background-image: url("icons/reboot.png");
 }
