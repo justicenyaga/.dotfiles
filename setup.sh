@@ -48,7 +48,7 @@ yay -Sy $packages --needed --noconfirm
 if [[ ! -e "$HOME/.config/user-dirs.dirs" ]]; then
   xdg-user-dirs-update
 fi
-mkdir ~/.mpd
+mkdir ~/.mpd/playlists -p
 
 #### INSTALL RICE ####
 
