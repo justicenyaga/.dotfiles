@@ -56,13 +56,10 @@ printf "\nInstalling dotfiles\n"
 sleep 1
 
 # install root target packages
-sudo stow --adopt -t / keyd sddm sddm-Xsetup
-
-home_target="bat fonts git hypr i3 kitty kvantum kwalletrc lazygit mpd ncmpcpp nvim picom polybar rofi 
-  tmux wallpapers waybar wlogout wofi xfce4 zsh"
+sudo stow --adopt -t / root
 
 # install home target packages
-stow --adopt -t ~/ $home_target
+stow --adopt -t ~/ home
 
 printf "\nBuilding bat theme\n"
 sleep 1
