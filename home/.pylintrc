@@ -1,0 +1,17 @@
+[MAIN]
+; init-hook='import sys; sys.path.append("/home/justice/.local/share/virtualenvs/env-name/lib/pythonx.x/site-packages")'
+
+[LOGGING]
+disable=raw-checker-failed,
+        bad-inline-option,
+        locally-disabled,
+        file-ignored,
+        suppressed-message,
+        useless-suppression,
+        deprecated-pragma,
+        use-implicit-booleaness-not-comparison-to-string,
+        use-implicit-booleaness-not-comparison-to-zero,
+        use-symbolic-message-instead,
+        missing-module-docstring,
+        missing-class-docstring,
+        missing-function-docstring
