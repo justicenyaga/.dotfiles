@@ -21,12 +21,13 @@ return {
 			if isDiff ~= 0 or util.string_starts(bufName, "diff") then
 				-- Close diffview if it's already open
 				diffview.FOCUSED_HISTORY_FILE = nil
-				cmd.bd()
+				cmd.tabclose()
 				cmd.tabprev()
 			else
-				-- Open file history
-				api.nvim_feedkeys(":DiffviewFileHistory " .. fn.expand("%"), "n", false)
-				util.press_enter()
+				util.open_in_tab("diff", true, function()
+					api.nvim_feedkeys(":DiffviewFileHistory " .. fn.expand("%"), "n", false)
+					util.press_enter()
+				end)
 			end
 		end, { desc = "Toggle file history on current file" })
 
@@ -36,12 +37,13 @@ return {
 			local bufName = api.nvim_buf_get_name(0)
 			if isDiff ~= 0 or util.string_starts(bufName, "diff") then
 				-- Close diffview if it's already open
-				cmd.bd()
+				cmd.tabclose()
 				cmd.tabprev()
 			else
-				-- Open file history
-				cmd.DiffviewFileHistory()
-				util.press_enter()
+				util.open_in_tab("diff", true, function()
+					cmd.DiffviewFileHistory()
+					util.press_enter()
+				end)
 			end
 		end, { desc = "Toggle file history of the repo" })
 
@@ -84,9 +86,10 @@ return {
 				cmd.tabclose()
 				cmd.tabprev()
 			else
-				-- Open diffview against main branch
-				cmd.DiffviewOpen("main")
-				util.press_enter()
+				util.open_in_tab("diff", true, function()
+					cmd.DiffviewOpen("main")
+					util.press_enter()
+				end)
 			end
 		end, { desc = "Review changes against main branch and current HEAD (breaks if no main branch)" })
 
@@ -98,8 +101,10 @@ return {
 				cmd.tabclose()
 				cmd.tabprev()
 			else
-				-- Open diffview
-				cmd.DiffviewOpen()
+				util.open_in_tab("diff", true, function()
+					-- Open diffview
+					cmd.DiffviewOpen()
+				end)
 			end
 		end, { desc = "Toggle Open/Close diffview tab" })
 

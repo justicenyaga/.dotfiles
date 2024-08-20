@@ -39,21 +39,32 @@ end
 
 local function get_tab_by_buf_name(name, starts_with)
 	for _, tab in ipairs(api.nvim_list_tabpages()) do
-		local win = api.nvim_tabpage_get_win(tab)
-		local buf = api.nvim_win_get_buf(win)
-		local buf_name = api.nvim_buf_get_name(buf)
-		if starts_with then
-			if string_starts(buf_name, name) then
-				return tab
-			end
-		else
-			local base_name = basename(buf_name)
-			if base_name == name then
-				return tab
+		local wins = api.nvim_tabpage_list_wins(tab)
+		for _, win in ipairs(wins) do
+			local buf = api.nvim_win_get_buf(win)
+			local buf_name = api.nvim_buf_get_name(buf)
+			if starts_with then
+				if string_starts(buf_name, name) then
+					return tab
+				end
+			else
+				local base_name = basename(buf_name)
+				if base_name == name then
+					return tab
+				end
 			end
 		end
 	end
 	return -1
+end
+
+local function open_in_tab(buf_name, starts_with, open_fn)
+	local tab = get_tab_by_buf_name(buf_name, starts_with)
+	if tab ~= -1 then
+		api.nvim_set_current_tabpage(tab)
+	else
+		open_fn()
+	end
 end
 
 return {
@@ -63,4 +74,5 @@ return {
 	get_tab_by_buf_name = get_tab_by_buf_name,
 	press_enter = press_enter,
 	string_starts = string_starts,
+	open_in_tab = open_in_tab,
 }
