@@ -260,7 +260,7 @@ exec_always --no-startup-id xset led 3
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # Load wallpaper
-exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/background-11.png ~/Pictures/wallpapers/background-11.png
+exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/background-8.png ~/Pictures/wallpapers/background-8.png
 # exec_always --no-startup-id nitrogen --restore
 
 # Polybar
