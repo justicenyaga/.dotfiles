@@ -1,6 +1,6 @@
 return {
 	"hrsh7th/nvim-cmp",
-	event = "InsertEnter",
+	event = { "InsertEnter", "CmdlineEnter" },
 	dependencies = {
 		"hrsh7th/cmp-buffer", -- source for text in buffer
 		"hrsh7th/cmp-path", -- source for file system paths
@@ -63,7 +63,8 @@ return {
 			}),
 			-- sources for autocompletion
 			sources = cmp.config.sources({
-				{ name = "copilot" }, -- copilot
+				{ name = "codeium" },
+				-- { name = "copilot" }, -- copilot
 				{ name = "nvim_lsp" }, -- language server
 				{ name = "vim-dadbod-completion" },
 				{ name = "luasnip" }, -- snippets
@@ -76,7 +77,10 @@ return {
 					mode = "symbol",
 					maxwidth = 50,
 					ellipsis_char = "...",
-					symbol_map = { Copilot = "" },
+					symbol_map = {
+						Copilot = "",
+						Codeium = "󱃖",
+					},
 				}),
 			},
 		})
