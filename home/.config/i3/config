@@ -197,7 +197,7 @@ assign [class="kitty"] $ws1
 assign [class="Code"] $ws1
 assign [class="Gedit"] $ws1
 assign [class="gnome-text-editor"] $ws1
-assign [class="Brave-browser"] $ws2
+assign [class="Google-chrome"] $ws2
 assign [class="Thunar"] $ws3
 assign [class="File-roller"] $ws3
 assign [class="mpv"] $ws4
@@ -268,7 +268,7 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # Start common programs
 exec --no-startup-id kitty
-exec --no-startup-id brave
+exec --no-startup-id google-chrome-stable
 exec --no-startup-id thunar
 exec --no-startup-id mpv
 

@@ -7,7 +7,7 @@ return {
 		build = "cd app && yarn install",
 		init = function()
 			vim.g.mkdp_filetypes = { "markdown" }
-			vim.g.mkdp_browser = "brave"
+			vim.g.mkdp_browser = "google-chrome-stable"
 		end,
 		config = function()
 			local opts = { noremap = true, silent = true }
