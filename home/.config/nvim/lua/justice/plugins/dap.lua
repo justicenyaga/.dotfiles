@@ -6,7 +6,7 @@ return {
 		"mxsdev/nvim-dap-vscode-js",
 		{
 			"microsoft/vscode-js-debug",
-			build = "npm i && npm run compile vsDebugServerBundle && mv dist out",
+			build = "npm i --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 		},
 	},
 	lazy = true,
