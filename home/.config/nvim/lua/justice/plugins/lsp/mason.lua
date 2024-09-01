@@ -37,6 +37,7 @@ return {
 			ensure_installed = {
 				"cssls",
 				"clangd",
+				"dockerls",
 				"emmet_ls",
 				"gopls",
 				"graphql",
