@@ -265,6 +265,9 @@ exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/background-8.jpg
 # Polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
+# Gnome-keyring-daemon
+exec_always --no-startup-id ~/.config/hypr/scripts/startup.sh
+
 # Start common programs
 exec --no-startup-id kitty
 exec --no-startup-id google-chrome-stable
