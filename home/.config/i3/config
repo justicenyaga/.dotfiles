@@ -173,8 +173,7 @@ client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-co
 client.urgent           $urgent-bg-color    $urgent-bg-color   $urgent-text-color   $urgent-bg-color
 
 # Gaps
-gaps inner 12
-gaps outer 8
+gaps inner 10
 
 # Monitors
 set $fm HDMI-1
@@ -260,7 +259,7 @@ exec_always --no-startup-id xset led 3
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # Load wallpaper
-exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/background-8.png ~/Pictures/wallpapers/background-8.png
+exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/background-8.jpg ~/Pictures/wallpapers/background-8.jpg
 # exec_always --no-startup-id nitrogen --restore
 
 # Polybar
