@@ -46,6 +46,9 @@ return {
 				colors.fg_dark = "#BDC3C7"
 				colors.terminal_black = "#56616D"
 				colors.fg = "#ffffff"
+				colors.git.add = "#49FF6D"
+				colors.git.change = "#00AFFF"
+				colors.git.delete = "#FF3C3C"
 			end,
 			on_highlights = function(hl)
 				hl["@custom.readonly.declaration"] = { fg = "#ffb0b0" }
