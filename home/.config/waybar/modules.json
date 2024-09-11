@@ -75,7 +75,8 @@
   "pulseaudio": {
     "max-volume": 150,
     "scroll-step": 5,
-    "on-click": "pavucontrol",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "pavucontrol",
     "format": "{icon}  {volume}%",
     "format-bluetooth": "<span size='14000' color='#1e90ff'></span> {volume}%",
     "format-bluetooth-muted": " Muted",
