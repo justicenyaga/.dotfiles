@@ -19,4 +19,14 @@ return {
 			vim.keymap.set("n", "<leader>mdx", ":MarkdownPreviewStop<CR>", opts) -- Stop the preview
 		end,
 	},
+	{
+		"hedyhli/markdown-toc.nvim",
+		ft = "markdown",
+		cmd = { "Mtoc" },
+		opts = {
+			toc_list = {
+				item_format_string = "${indent}${marker} [[#${name}]]",
+			},
+		},
+	},
 }
