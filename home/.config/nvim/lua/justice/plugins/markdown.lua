@@ -22,6 +22,7 @@ return {
 	{
 		"hedyhli/markdown-toc.nvim",
 		ft = "markdown",
+		enabled = false,
 		cmd = { "Mtoc" },
 		opts = {
 			toc_list = {
