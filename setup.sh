@@ -42,6 +42,8 @@ packages="apple_cursor base bat blueman brave-bin brightnessctl chili-sddm-theme
 
 yay -Sy $packages --needed --noconfirm
 
+# install autotiling
+pipx install autotiling
 
 #### PREPARING FOLDERS ####
 
