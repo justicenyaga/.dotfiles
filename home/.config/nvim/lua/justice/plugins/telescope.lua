@@ -53,6 +53,13 @@ return {
 			builtin.find_files({ cwd = vim.fn.stdpath("config") })
 		end, { desc = "Fuzzy find neovim config files" })
 
+		keymap.set("n", "<leader>fo", function()
+			builtin.find_files({ search_dirs = { "~/obsidian/notes", "~/obsidian/inbox" } })
+		end, { desc = "Find files in notes dirs" })
+		keymap.set("n", "<leader>fz", function()
+			builtin.live_grep({ search_dirs = { "~/obsidian/notes", "~/obsidian/inbox" } })
+		end, { desc = "Find string in notes dirs" })
+
 		keymap.set("n", "<leader>/", function()
 			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 				previewer = false,

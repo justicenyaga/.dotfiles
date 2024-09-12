@@ -28,6 +28,8 @@ alias cd="z"
 alias open="xdg-open"
 alias pnvim="pipenv run nvim"
 alias netspeed="dstat --net --top-io-adv"
+alias oo="cd $HOME/obsidian"
+alias or="nvim -p $HOME/obsidian/inbox/*.md"
 
 
 # gem

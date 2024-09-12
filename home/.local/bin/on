@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+if [ -z "$1" ]; then
+  echo "Error: A file must be set, e.g. on \"the wonderful thing about tiggers\"."
+  exit 1
+fi
+
+filename=$(echo "$1" | tr ' ' '-')
+formatted_filename=$(date "+%Y-%m-%d")_${filename}.md
+cd "$HOME/obsidian" || exit
+touch "inbox/${formatted_filename}"
+nvim "inbox/${formatted_filename}"
