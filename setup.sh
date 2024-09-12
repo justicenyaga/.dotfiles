@@ -31,7 +31,7 @@ printf "\nInstalling packages\n"
 sleep 1
 
 
-packages="apple_cursor base bat blueman brave-bin brightnessctl chili-sddm-theme eza fd feh file-roller fzf 
+packages="apple_cursor base bat blueman brave-bin brightnessctl chili-sddm-theme emote eza fd feh file-roller fzf 
   git-credential-manager-bin git-delta gnome-keyring grim gvfs gvfs-mtp htop hyprland hyprlock hyprpaper i3-wm
   imagemagick keyd kitty kvantum lazygit man-db mercurial mpd mpc mpv neovim net-tools ntfs-3g nwg-look
   obsidian pass picom polybar power-profiles-daemon python-pipenv python-pipx python-pynvim qt6ct ripgrep rofi
