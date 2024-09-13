@@ -30,6 +30,7 @@ alias pnvim="pipenv run nvim"
 alias netspeed="dstat --net --top-io-adv"
 alias oo="cd $HOME/obsidian"
 alias or="nvim -p $HOME/obsidian/inbox/*.md"
+alias tsession="tmux-sessionizer"
 
 
 # gem
