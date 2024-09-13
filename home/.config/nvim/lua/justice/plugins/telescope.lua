@@ -39,7 +39,9 @@ return {
 		-- set keymaps
 		local keymap = vim.keymap -- for conciseness
 
-		keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy find files in cwd" })
+		keymap.set("n", "<leader>ff", function()
+			builtin.find_files({ hidden = true, follow = true })
+		end, { desc = "Fuzzy find files in cwd" })
 		keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = "Fuzzy find recent files" })
 		keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "Find string in cwd" })
 		keymap.set("n", "<leader>fc", builtin.grep_string, { desc = "Find string under cursor in cwd" })
