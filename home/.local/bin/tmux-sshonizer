@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+ssh_config="$HOME/.ssh/config"
+
+if [[ $# -eq 1 ]]; then
+	ssh_name=$1
+elif [[ $# -eq 0 ]]; then
+  if [ ! -f "$ssh_config" ]; then
+    echo "SSH config file not found. Exiting."
+    sleep 3
+    exit 1
+  fi
+
+  ssh_name=$(cat $ssh_config | grep -E '^Host ' | awk '{print $2}' | fzf --height=40% --reverse --prompt="Select SSH host: ")
+fi
+
+if [[ -z $ssh_name ]]; then
+    echo "No host provided. Exiting"
+    exit 0
+fi
+
+# prefix 'SSH-' and replace '.' and '-' with '_'
+selected_name="SSH-$(basename "$ssh_name" | tr '.-' '__')"
+
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+	tmux new-session -s $selected_name -c "$ssh_name"
+	exit 0
+fi
+
+if ! tmux has-session -t=$selected_name 2>/dev/null; then
+	tmux new-session -s "$selected_name" -d "ssh $ssh_name"
+fi
+
+if [[ -n $tmux_running ]] && [[ -z $TMUX ]]; then
+  tmux attach -t "$selected_name"
+  exit 0
+fi
+
+tmux switch-client -t $selected_name
