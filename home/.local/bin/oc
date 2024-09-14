@@ -1,0 +1,14 @@
+#!/bin/bash
+
+obsidian_dir="$HOME/obsidian"
+
+cd $obsidian_dir
+
+find "$obsidian_dir/notes" -type f | while read -r file; do
+  # stage the file
+  git add "$file"
+  
+  # commit each file separately
+  commit_message=$(echo "$file" | sed "s|$obsidian_dir/||; s|^[^/]*/[^/]*/*||; s/_/ /g; s/\.md//; s/ /-/g")
+  git commit -m "$commit_message"
+done

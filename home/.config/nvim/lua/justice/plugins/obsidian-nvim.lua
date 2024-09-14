@@ -78,5 +78,7 @@ return {
 
 		keymap.set("n", "<leader>ok", ":!mv '%:p' ~/obsidian/review/<cr>:bd<cr>")
 		keymap.set("n", "<leader>odd", ":!rm '%:p'<cr>:bd<cr>")
+
+		keymap.set("n", "<leader>oc", ":!oc<cr>", { silent = true, desc = "Commit a staged obsidian note" })
 	end,
 }
