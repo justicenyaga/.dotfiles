@@ -80,6 +80,7 @@ return {
 		keymap.set("n", "<leader>ok", ":!mv '%:p' ~/obsidian/review/<cr>:bd<cr>", { desc = "Move note to review dir" })
 		keymap.set("n", "<leader>odd", ":!rm '%:p'<cr>:bd<cr>", { desc = "Discard note" })
 
+		keymap.set("n", "<leader>og", ":!og<cr>", { silent = true, desc = "Move notes in review to notes dir" })
 		keymap.set("n", "<leader>oc", ":!oc<cr>", { silent = true, desc = "Commit a staged obsidian note" })
 	end,
 }
