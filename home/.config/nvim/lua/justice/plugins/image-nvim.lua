@@ -27,10 +27,10 @@ return {
 						filetypes = { "norg" },
 					},
 					html = {
-						enabled = true,
+						enabled = false,
 					},
 					css = {
-						enabled = true,
+						enabled = false,
 					},
 				},
 				max_height_window_percentage = 40,
