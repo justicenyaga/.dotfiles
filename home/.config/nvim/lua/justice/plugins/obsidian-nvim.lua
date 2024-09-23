@@ -62,6 +62,7 @@ return {
 			disable_frontmatter = true,
 
 			ui = {
+				enable = false,
 				checkboxes = {
 					[" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
 					["x"] = { char = "", hl_group = "ObsidianDone" },

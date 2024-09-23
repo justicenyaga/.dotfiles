@@ -83,4 +83,4 @@ opt.shortmess:append("IWs") -- disable intro message and search hit BOTTOM, TOP 
 opt.swapfile = false
 
 -- conceal level
-opt.conceallevel = 2
+opt.conceallevel = 0
