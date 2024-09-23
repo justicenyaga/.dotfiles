@@ -8,25 +8,34 @@ DEST_DIR="notes"
 find "$VAULT_DIR/$SOURCE_DIR" -type f -name "*.md" | while read -r file; do
   echo "Processing $file"
 
-  # Extract the tag from the file. This assumes the tag is on the line immediately following "tags:"
-  tag=$(awk '/tags:/{getline; print; exit}' "$file" | sed -e 's/^ *- *//' -e 's/^ *//;s/ *$//')
+  # Extract the tags from the file. This assumes the tags are on the line immediately following "tags:"
+  # and ends when the next line has a ":" (new section) or "---" (end of frontmatter)
+  tags=$(awk '/tags:/ {f=1; next} f && /^[[:space:]]*-/ {gsub(/^[[:space:]]*-/, "", $0); print $0} f && (/^---/ || /:/) {exit}' "$file" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | paste -sd ',' | sed 's/,--//g')
+  # tag=$(awk '/tags:/{getline; print; exit}' "$file" | sed -e 's/^ *- *//' -e 's/^ *//;s/ *$//')
 
-  # if tag is not blank,
-  [[ ! -z "$tag" ]] && echo "Found tag: $tag"
-
-  # If a tag is found, proceed with moving the file
-  if [ ! -z "$tag" ]; then
-    # Create the target directory if it doesn't exist
-    TARGET_DIR="$VAULT_DIR/$DEST_DIR/$tag"
-    mkdir -p "$TARGET_DIR"
-
-    # Move the file to the target directory
-    mv "$file" "$TARGET_DIR/"
-    echo "Moved $file to $TARGET_DIR"
-  else
-    echo "No tag found in $file"
+  # If not tags were found, skip to the next file
+  if [[ -z "$tags" ]]; then
+    echo "Not tags found in $file"
+    continue
   fi
 
+  # Create nested directories based on tags
+  # Split the tags by commas and store them in an array
+  TAG_ARRAY=("${(@s/,/)tags}")
+
+  TARGET_DIR="$VAULT_DIR/$DEST_DIR"
+
+  for tag in "${TAG_ARRAY[@]}"; do
+    # Update the target directory path with the current tag
+    TARGET_DIR="$TARGET_DIR/$tag"
+  done
+
+  # Create the nested directories
+  mkdir -p "$TARGET_DIR"
+
+  # Move the file to the final nested directory
+  mv "$file" "$TARGET_DIR"
+  echo "Moved $file to $TARGET_DIR"
 done
 
 echo "Done 🪷"
