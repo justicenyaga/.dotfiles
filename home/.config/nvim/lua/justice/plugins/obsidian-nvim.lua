@@ -76,8 +76,8 @@ return {
 		keymap.set("n", "<leader>ot", ":ObsidianTemplate note<cr>", { desc = "Apply note template on current buffer" })
 		keymap.set("n", "<leader>of", ":s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>", { desc = "Format title under cursor" })
 
-		keymap.set("n", "<leader>ok", ":!mv '%:p' ~/obsidian/review/<cr>:bd<cr>")
-		keymap.set("n", "<leader>odd", ":!rm '%:p'<cr>:bd<cr>")
+		keymap.set("n", "<leader>ok", ":!mv '%:p' ~/obsidian/review/<cr>:bd<cr>", { desc = "Move note to review dir" })
+		keymap.set("n", "<leader>odd", ":!rm '%:p'<cr>:bd<cr>", { desc = "Discard note" })
 
 		keymap.set("n", "<leader>oc", ":!oc<cr>", { silent = true, desc = "Commit a staged obsidian note" })
 	end,
