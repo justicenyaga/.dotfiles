@@ -145,27 +145,26 @@ return {
 		vim.fn.sign_define("DapBreakpoint", { text = "🐞" })
 
 		-- Start debuggin sessions
-		keymap.set("n", "<leader>ds", function()
+		keymap.set("n", "<F5>", function()
 			dap.continue()
-			dapui.toggle({})
+			dapui.open({})
 			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false) -- Spaces buffers evenly
 		end, { desc = "Start debugging session" })
-
-		keymap.set("n", "<leader>dl", require("dap.ui.widgets").hover, { desc = "" })
-		keymap.set("n", "<leader>dc", dap.continue, { desc = "Debugging Continue" })
-		keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint on a Line" })
-		keymap.set("n", "<leader>do", dap.step_over, { desc = "Step Over" })
-		keymap.set("n", "<leader>di", dap.step_into, { desc = "Step into" })
-		keymap.set("n", "<leader>dO", dap.step_out, { desc = "Step Out" })
-		keymap.set("n", "<leader>dC", function()
+		keymap.set("n", "<F3>", require("dap.ui.widgets").hover, { desc = "Evaluate objects on the current step" })
+		keymap.set("n", "<F5>", dap.continue, { desc = "Debugging Continue" })
+		keymap.set("n", "<F9>", dap.toggle_breakpoint, { desc = "Toggle Breakpoint on a Line" })
+		keymap.set("n", "<F10>", dap.step_over, { desc = "Step Over" })
+		keymap.set("n", "<F11>", dap.step_into, { desc = "Step into" })
+		keymap.set("n", "<F23>", dap.step_out, { desc = "Step Out" }) -- Shift + F11
+		keymap.set("n", "<F21>", function()
 			dap.clear_breakpoints()
 			notify("Breakpoints cleared", "warn")
-		end, { desc = "Clear all Breakpoints" })
+		end, { desc = "Clear all Breakpoints" }) -- Shift + F9
 
 		-- Close debugger and clear breakpoints
-		keymap.set("n", "<leader>de", function()
+		keymap.set("n", "<F17>", function() -- Shift + F5
 			dap.clear_breakpoints()
-			dapui.toggle({})
+			dapui.close({})
 			dap.terminate()
 			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false) --
 			notify("Debug session ended", "warn")
