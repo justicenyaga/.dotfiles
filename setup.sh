@@ -34,7 +34,7 @@ sleep 1
 packages="apple_cursor base bat blueman brave-bin brightnessctl chili-sddm-theme emote eza fd feh file-roller fzf 
   git-credential-manager-bin git-delta gnome-keyring grim gvfs gvfs-mtp htop hyprland hyprlock hyprpaper i3-wm
   imagemagick keyd kitty kvantum lazygit man-db mercurial mpd mpc mpv neovim net-tools ntfs-3g nwg-look
-  obsidian pass picom polybar power-profiles-daemon python-pipenv python-pipx python-pynvim qt6ct ripgrep rofi
+  obsidian pass picom polybar power-profiles-daemon pyenv python-pipenv python-pipx python-pynvim qt6ct ripgrep rofi
   seahorse shotwell stow thunar thunar-volman timidity++ tmux ttf-cascadia-code ttf-fira-sans
   ttf-jetbrains-mono-nerd ttf-joypixels ttf-meslo-nerd ttf-nerd-fonts-symbols-mono ttf-roboto ttf-terminus-nerd
   unzip waybar wget wlogout wl-clipboard wofi xclip xdg-user-dirs xfce4-notifyd xfce-polkit xorg-font-util
