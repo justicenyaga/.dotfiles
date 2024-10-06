@@ -1,0 +1,88 @@
+[manager]
+prepend_keymap = [
+  # Close tab or quit
+  { on = "q", run = "close", desc = "Close current tab (quit if it's the last tab)" },
+
+  # Toggle selection (entry under cursor)
+  { on = "<Space>", run = "select --state=none", desc = "Toggle the current selection state" },
+
+  # File operations
+  { on = "p", run = "plugin --sync smart-paste", desc = "Paste yanked files into hovered dir or CWD (overwrite if exists)" },
+  { on = "-", run = "plugin --sync smart-link", desc = "Link yanked files into the hovered dir or CWD" },
+  { on = "<C-->", run = "plugin --sync smart-hardlink", desc = "Hardlink yanked files into the hovered dir or CWD" },
+  { on = "a", run = "plugin --sync smart-create", desc = "Create a file (ends with / for dirs) in hovered dir or CWD" },
+  { on = "A", run = "create", desc = "Create a file (ends with / for dirs)" },
+  { on = "e", run = "rename --cursor=before_ext", desc = "Rename selected files(s) - cursor before ext" },
+  { on = "r", run = "rename", desc = "Rename selected files(s) - cursor after ext" },
+  { on = "z", run = "plugin fzf", desc = "Jump to a dir or reveal a file using fzf" },
+  { on = "Z", run = "plugin zoxide", desc = "Jump to a dir using zoxide" },
+
+  # Open with prompt
+  { on = "o", run = "plugin open-with-cmd --args=block", desc = "Open with command in the terminal" },
+  { on = "O", run = "plugin open-with-cmd", desc = "Open with command" },
+
+  # Enter dir or open file
+  { on = "<Enter>", run = "plugin --sync smart-enter", desc = "Enter the child directory, or open the file" },
+
+  # Drag and Drop
+  { on = "<C-o>", run = '''shell 'dragon-drop -a -x -T "$@"' --confirm''', desc = "Open hovered item on dragon-drop (Drag & drop util)" },
+
+  # Seeking on previewer
+  { on = "<C-k>", run = "seek -5", desc = "Seek up 5 units in the preview" },
+  { on = "<C-j>", run = "seek 50", desc = "Seek down 5 units in the preview" },
+
+  # Goto
+  { on = ["g", "c"], run = "cd ~/Documents", desc = "Go to documents dir" },
+  { on = ["g", "m"], run = "cd ~/Music", desc = "Go to music dir" },
+  { on = ["g", "p"], run = "cd ~/Pictures", desc = "Go to pictures dir" },
+  { on = ["g", "v"], run = "cd ~/Videos", desc = "Go to videos dir" },
+  { on = ["g", "a"], run = "cd ~/Videos/Movies", desc = "Go to movies dir" },
+  { on = ["g", "l"], run = "cd ~/Videos/Tutorials", desc = "Go to the tutorials directory" },
+  { on = ["g", "j"], run = "cd ~/projects", desc = "Go to projects dir" },
+
+  # Size of selection or CWD
+  { on = "i", run  = "plugin what-size", desc = "Calc size of selection or CWD" },
+
+  # Preview window
+  { on = "<C-f>", run = "plugin --sync max-preview", desc = "Toggle maximize preview" },
+  { on = "<C-p>", run = "plugin --sync hide-preview", desc = "Toggle hide preview" },
+
+  # Tabs
+  { on = "<C-t>", run = "tab_create --current", desc = "Create a new tab with CWD" },
+
+  # Trash
+  { on = ["t", "r"], run = "shell 'conceal restore' --block --confirm", desc = "Restore files (CWD files) from trash" },
+  { on = ["t", "c"], run = "shell 'conceal clean' --block --confirm", desc = "Permanently delete files (CWD files) in trash" },
+  { on = ["t", "C"], run = "shell 'conceal clean -a' --block --confirm", desc = "Empty trash" },
+
+  # Relative motion
+  { on = [ "1" ], run = "plugin relative-motions --args=1", desc = "Relative motion count" },
+  { on = [ "2" ], run = "plugin relative-motions --args=2", desc = "Relative motion count" },
+  { on = [ "3" ], run = "plugin relative-motions --args=3", desc = "Relative motion count" },
+  { on = [ "4" ], run = "plugin relative-motions --args=4", desc = "Relative motion count" },
+  { on = [ "5" ], run = "plugin relative-motions --args=5", desc = "Relative motion count" },
+  { on = [ "6" ], run = "plugin relative-motions --args=6", desc = "Relative motion count" },
+  { on = [ "7" ], run = "plugin relative-motions --args=7", desc = "Relative motion count" },
+  { on = [ "8" ], run = "plugin relative-motions --args=8", desc = "Relative motion count" },
+  { on = [ "9" ], run = "plugin relative-motions --args=9", desc = "Relative motion count" },
+]
+
+
+[select]
+prepend_keymap = [
+  { on = "<C-k>", run = "arrow -1", desc = "Move cursor up" },
+  { on = "<C-j>", run = "arrow 1", desc = "Move cursor down" },
+]
+
+[completion]
+prepend_keymap = [
+  { on = "<C-y>", run = "close --submit", desc = "Submit the completion" },
+  
+	{ on = "<C-k>", run = "arrow -1", desc = "Move cursor up" },
+	{ on = "<C-j>", run = "arrow 1", desc = "Move cursor down" },
+]
+
+[tasks]
+prepend_keymap = [
+  { on = "q", run = "close", desc = "Close task manager" },
+]

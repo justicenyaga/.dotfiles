@@ -1,0 +1,8 @@
+[manager]
+ratio = [2, 4, 3]
+sort_by = "natural"
+
+[plugin]
+prepend_previewers = [
+  { name = "*.md", run = "glow" },
+]
