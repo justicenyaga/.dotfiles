@@ -32,14 +32,14 @@ sleep 1
 
 
 packages="apple_cursor base bat blueman brave-bin brightnessctl chili-sddm-theme conceal-bin dragon-drop emote
-  eza fd feh ffmpegthumbnailer file-roller fzf glow git-credential-manager-bin git-delta gnome-keyring grim gvfs
-  gvfs-mtp htop hyprland hyprlock hyprpaper i3-wm imagemagick keyd kitty kvantum lazygit man-db mediainfo
-  mercurial mpd mpc mpv neovim net-tools ntfs-3g nwg-look obsidian p7zip pass perl-image-exiftool picom polybar
-  poppler power-profiles-daemon pyenv python-pipenv python-pipx python-pynvim qt6ct ripgrep rofi seahorse shotwell
-  stow thunar thunar-volman timidity++ tmux ttf-cascadia-code ttf-fira-sans ttf-jetbrains-mono-nerd ttf-joypixels
-  ttf-meslo-nerd ttf-nerd-fonts-symbols-mono ttf-roboto ttf-terminus-nerd unzip waybar wget wlogout wl-clipboard
-  wofi xclip xdg-user-dirs xfce4-notifyd xfce-polkit xorg-font-util xorg-fonts-misc xorg-mkfontscale yazi zip
-  zoxide zsh"
+  eza fd feh ffmpegthumbnailer file-roller fzf glow git-credential-manager-bin git-delta gnome-keyring
+  gnome-system-monitor grim gvfs gvfs-mtp htop hyprland hyprlock hyprpaper i3-wm imagemagick keyd kitty kvantum
+  lazygit man-db mediainfo mercurial mpd mpc mpv neovim net-tools ntfs-3g nwg-look obsidian p7zip pass
+  perl-image-exiftool picom polybar poppler power-profiles-daemon pyenv python-pipenv python-pipx python-pynvim
+  qt6ct ripgrep rofi seahorse shotwell stow thunar thunar-volman timidity++ tmux ttf-cascadia-code ttf-fira-sans
+  ttf-jetbrains-mono-nerd ttf-joypixels ttf-meslo-nerd ttf-nerd-fonts-symbols-mono ttf-roboto ttf-terminus-nerd
+  unzip waybar wget wlogout wl-clipboard wofi xclip xdg-user-dirs xfce4-notifyd xfce-polkit xorg-font-util
+  xorg-fonts-misc xorg-mkfontscale yazi zip zoxide zsh"
 
 yay -Sy $packages --needed --noconfirm
 
