@@ -15,7 +15,6 @@ elif [[ $# -eq 0 ]]; then
 fi
 
 if [[ -z $ssh_name ]]; then
-    echo "No host provided. Exiting"
     exit 0
 fi
 
