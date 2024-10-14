@@ -1,0 +1,5 @@
+sync:
+  defaults:
+    permissions:
+      defaultFileMode: 0644
+      defaultDirectoryMode: 0751
