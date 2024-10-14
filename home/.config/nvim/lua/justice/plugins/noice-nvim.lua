@@ -62,5 +62,17 @@ return {
 				},
 			},
 		})
+
+		vim.keymap.set({ "n", "i", "s" }, "<c-d>", function()
+			if not require("noice.lsp").scroll(4) then
+				return "<c-d>"
+			end
+		end, { silent = true, expr = true, desc = "Scroll lsp hover doc down" })
+
+		vim.keymap.set({ "n", "i", "s" }, "<c-u>", function()
+			if not require("noice.lsp").scroll(-4) then
+				return "<c-u>"
+			end
+		end, { silent = true, expr = true, desc = "Scroll lsp hover doc up" })
 	end,
 }
