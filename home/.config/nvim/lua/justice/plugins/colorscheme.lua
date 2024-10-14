@@ -54,6 +54,7 @@ return {
 				hl["@custom.readonly.declaration"] = { fg = "#ffb0b0" }
 				hl["@constant"] = { fg = "#ffb0b0" }
 				hl["@tag"] = { fg = "#94bdff" }
+				hl["@tag.javascript"] = { fg = "#94bdff" }
 				hl["@tag.delimiter"] = { fg = "#94bdff" }
 			end,
 		})
