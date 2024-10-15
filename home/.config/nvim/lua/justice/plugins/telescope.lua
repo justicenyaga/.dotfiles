@@ -31,17 +31,45 @@ return {
 					},
 				},
 			},
+			pickers = {
+				find_files = {
+					follow = true,
+				},
+			},
 		})
 
 		telescope.load_extension("fzf")
 		telescope.load_extension("harpoon")
 
+		local custom_find_files
+		custom_find_files = function(opts, no_ignore)
+			opts = opts or {}
+			no_ignore = vim.F.if_nil(no_ignore, false)
+			opts.attach_mappings = function(_, map)
+				map({ "n", "i" }, "<C-h>", function(prompt_bufnr)
+					local prompt = require("telescope.actions.state").get_current_line()
+					require("telescope.actions").close(prompt_bufnr)
+					no_ignore = not no_ignore
+					custom_find_files({ default_text = prompt }, no_ignore)
+				end)
+				return true
+			end
+
+			if no_ignore then
+				opts.no_ignore = true
+				opts.hidden = true
+				opts.prompt_title = "Find Files <ALL>"
+			else
+				opts.prompt_title = "Find Files"
+			end
+
+			builtin.find_files(opts)
+		end
+
 		-- set keymaps
 		local keymap = vim.keymap -- for conciseness
 
-		keymap.set("n", "<leader>ff", function()
-			builtin.find_files({ hidden = true, follow = true })
-		end, { desc = "Fuzzy find files in cwd" })
+		keymap.set("n", "<leader>ff", custom_find_files, { desc = "Fuzzy find files in cwd" })
 		keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = "Fuzzy find recent files" })
 		keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "Find string in cwd" })
 		keymap.set("n", "<leader>fc", builtin.grep_string, { desc = "Find string under cursor in cwd" })
