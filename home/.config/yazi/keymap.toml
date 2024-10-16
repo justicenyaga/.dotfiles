@@ -23,6 +23,7 @@ prepend_keymap = [
 
   # Enter dir or open file
   { on = "<Enter>", run = "plugin --sync smart-enter", desc = "Enter the child directory, or open the file" },
+  { on = "l", run = "plugin --sync smart-enter", desc = "Enter the child directory, or open the file" },
 
   # Drag and Drop
   { on = "<C-o>", run = '''shell 'dragon-drop -a -x -T "$@"' --confirm''', desc = "Open hovered item on dragon-drop (Drag & drop util)" },
