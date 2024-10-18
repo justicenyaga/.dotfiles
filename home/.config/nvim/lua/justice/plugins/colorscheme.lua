@@ -55,6 +55,7 @@ return {
 				hl["@constant"] = { fg = "#ffb0b0" }
 				hl["@tag"] = { fg = "#94bdff" }
 				hl["@tag.javascript"] = { fg = "#94bdff" }
+				hl["@tag.builtin.javascript"] = { fg = "#94bdff" }
 				hl["@tag.delimiter"] = { fg = "#94bdff" }
 			end,
 		})
