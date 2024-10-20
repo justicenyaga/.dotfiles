@@ -39,7 +39,6 @@ return {
 		})
 
 		telescope.load_extension("fzf")
-		telescope.load_extension("harpoon")
 
 		local custom_find_files
 		custom_find_files = function(opts, no_ignore)
@@ -76,7 +75,6 @@ return {
 		keymap.set("n", "<leader>fy", builtin.lsp_dynamic_workspace_symbols, { desc = "Fuzy find workspace symbols" })
 		keymap.set("n", "<leader>fY", builtin.lsp_document_symbols, { desc = "Fuzy find document symbols" })
 		keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume the last telescope list" })
-		keymap.set("n", "<leader>fh", "<cmd>Telescope harpoon marks<cr>", { desc = "Fuzzy find harpoon marked files" })
 		keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Fuzzy find todos" })
 
 		keymap.set("n", "<leader>fn", function()
