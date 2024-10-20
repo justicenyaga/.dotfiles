@@ -50,9 +50,6 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 keymap.set("n", "<leader>rc", ":%s/<C-r><C-w>//gc<Left><Left><Left>", { desc = "Find and replace under cursor" })
 keymap.set("n", "<leader>rw", ":%s//gc<Left><Left><Left>", { desc = "Find and Replace a word" })
 
--- Git Graph
-keymap.set("n", "<leader>gg", ":Flog<CR>", { noremap = true, silent = true, desc = "Open Git Graph" })
-
 -- Live Server
 keymap.set("n", "<leader>ls", "<cmd>LiveServerToggle<cr>", { desc = "Toggle live server" })
 
