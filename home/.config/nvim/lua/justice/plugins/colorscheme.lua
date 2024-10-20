@@ -46,6 +46,7 @@ return {
 				colors.fg_dark = "#BDC3C7"
 				colors.terminal_black = "#56616D"
 				colors.fg = "#ffffff"
+				colors.comment = "#5e81ac"
 				colors.git.add = "#49FF6D"
 				colors.git.change = "#00AFFF"
 				colors.git.delete = "#FF3C3C"
@@ -57,6 +58,11 @@ return {
 				hl["@tag.javascript"] = { fg = "#94bdff" }
 				hl["@tag.builtin.javascript"] = { fg = "#94bdff" }
 				hl["@tag.delimiter"] = { fg = "#94bdff" }
+				hl["CursorLine"] = { bg = "#24293b" }
+				hl["DiffAdd"] = { bg = "#20303b" }
+				hl["DiffChange"] = { bg = "#1f2231" }
+				hl["DiffDelete"] = { bg = "#37222c" }
+				hl["DiffText"] = { bg = "#394b70" }
 			end,
 		})
 
