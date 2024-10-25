@@ -10,14 +10,14 @@ return {
 			"<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>",
 			desc = "Toggle buffer trouble list",
 		},
-		{ "<leader>cs", "<cmd>Trouble symbols toggle<cr>", desc = "Toggle symbols (Trouble)" },
+		{ "<leader>xs", "<cmd>Trouble symbols toggle<cr>", desc = "Toggle symbols (Trouble)" },
 		{
-			"<leader>cl",
+			"<leader>xl",
 			"<cmd>Trouble lsp toggle win.position=right<cr>",
 			desc = "LSP Definitions / references / ... (Trouble)",
 		},
 		{ "<leader>xq", "<cmd>Trouble qflist toggle focus=true<CR>", desc = "Toggle trouble quickfix list" },
-		{ "<leader>xl", "<cmd>Trouble loclist toggle focus=true<CR>", desc = "Toggle trouble location list" },
+		{ "<leader>xL", "<cmd>Trouble loclist toggle focus=true<CR>", desc = "Toggle trouble location list" },
 		{ "<leader>xt", "<cmd>Trouble todo toggle focus=true<CR>", desc = "Toggle todos in trouble" },
 	},
 }
