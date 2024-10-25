@@ -8,6 +8,7 @@ return {
 		"saadparwaiz1/cmp_luasnip", -- for autocompletion
 		"rafamadriz/friendly-snippets", -- useful snippets
 		"onsails/lspkind.nvim", -- vs-code like pictograms
+		"brenoprata10/nvim-highlight-colors", -- for color suggestions
 		-- es7/react/redux snippets
 		{
 			"dsznajder/vscode-es7-javascript-react-snippets",
@@ -73,15 +74,23 @@ return {
 			}),
 			-- configure lspkind for vs-code like pictograms in completion menu
 			formatting = {
-				format = lspkind.cmp_format({
-					mode = "symbol",
-					maxwidth = 50,
-					ellipsis_char = "...",
-					symbol_map = {
-						Copilot = "",
-						Codeium = "󱃖",
-					},
-				}),
+				format = function(entry, item)
+					item = lspkind.cmp_format({
+						mode = "symbol",
+						maxwidth = 50,
+						ellipsis_char = "...",
+						symbol_map = {
+							Copilot = "",
+							Codeium = "󱃖",
+						},
+					})(entry, item)
+					local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
+					if color_item.abbr_hl_group then
+						item.kind_hl_group = color_item.abbr_hl_group
+						item.kind = color_item.abbr
+					end
+					return item
+				end,
 			},
 		})
 	end,
