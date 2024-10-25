@@ -54,7 +54,7 @@ return {
 							{ find = "; before #%d+" },
 							{ find = "%d fewer lines" },
 							{ find = "%d more lines" },
-							{ find = "[DBUI]" },
+							{ find = "DBUI" },
 							{ find = "DB:" },
 						},
 					},
