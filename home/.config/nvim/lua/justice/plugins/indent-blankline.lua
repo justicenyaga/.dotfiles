@@ -50,8 +50,14 @@ return {
 				delay = 0,
 			},
 			options = {
-				border = "top",
-				try_as_border = true,
+				border = "both",
+				indent_at_cursor = false,
+			},
+			mappings = {
+				object_scope = "ib",
+				object_scope_with_border = "ab",
+				goto_top = "[b",
+				goto_bottom = "]b",
 			},
 			symbol = "▏",
 		})
