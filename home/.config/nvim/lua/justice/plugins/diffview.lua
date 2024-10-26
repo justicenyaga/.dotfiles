@@ -14,7 +14,7 @@ return {
 		-- For conciseness
 		local api, cmd, fn, keymap = vim.api, vim.cmd, vim.fn, vim.keymap
 
-		keymap.set("n", "<leader>gfh", function()
+		keymap.set("n", "<leader>gH", function()
 			local isDiff = fn.getwinvar(nil, "&diff")
 			local bufName = api.nvim_buf_get_name(0)
 			diffview.FOCUSED_HISTORY_FILE = bufName
@@ -29,7 +29,7 @@ return {
 					util.press_enter()
 				end)
 			end
-		end, { desc = "Toggle file history on current file" })
+		end, { desc = "Toggle current file history" })
 
 		-- Toggle file history of the repo
 		keymap.set("n", "<leader>gh", function()
@@ -45,7 +45,7 @@ return {
 					util.press_enter()
 				end)
 			end
-		end, { desc = "Toggle file history of the repo" })
+		end, { desc = "Toggle repository history" })
 
 		-- Toggle viewing all current changes
 		-- keymap.set("n", "<leader>gda", function()
@@ -62,7 +62,7 @@ return {
 		-- end
 		-- end, {desc = "Toggle viewing all current changes"})
 
-		keymap.set("n", "<leader>gR", function()
+		keymap.set("n", "<leader>ge", function()
 			local isDiff = fn.getwinvar(nil, "&diff")
 			local bufName = api.nvim_buf_get_name(0)
 
@@ -91,7 +91,7 @@ return {
 					util.press_enter()
 				end)
 			end
-		end, { desc = "Review changes against main branch and current HEAD (breaks if no main branch)" })
+		end, { desc = "Review HEAD against main branch" }) --breaks if no main branch
 
 		keymap.set("n", "<leader>gd", function()
 			local isDiff = fn.getwinvar(nil, "&diff")
@@ -106,7 +106,7 @@ return {
 					cmd.DiffviewOpen()
 				end)
 			end
-		end, { desc = "Toggle Open/Close diffview tab" })
+		end, { desc = "Toggle git diffview" })
 
 		diffview.setup({
 			view = {

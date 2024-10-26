@@ -1,23 +1,34 @@
 return {
 	"folke/trouble.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
-	opts = {},
 	cmd = "Trouble",
+	opts = {
+		auto_close = true,
+	},
 	keys = {
-		{ "<leader>xx", "<cmd>Trouble diagnostics toggle focus=true<cr>", desc = "Toggle trouble list" },
+		{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Toggle trouble list" },
 		{
 			"<leader>xb",
-			"<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>",
+			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 			desc = "Toggle buffer trouble list",
 		},
-		{ "<leader>xs", "<cmd>Trouble symbols toggle<cr>", desc = "Toggle symbols (Trouble)" },
 		{
-			"<leader>xl",
-			"<cmd>Trouble lsp toggle win.position=right<cr>",
-			desc = "LSP Definitions / references / ... (Trouble)",
+			"]x",
+			function()
+				local trouble = require("trouble")
+				trouble.next({ focus = false, new = false })
+				trouble.jump_only({ focus = false, new = false })
+			end,
+			desc = "Go to next item on trouble list",
 		},
-		{ "<leader>xq", "<cmd>Trouble qflist toggle focus=true<CR>", desc = "Toggle trouble quickfix list" },
-		{ "<leader>xL", "<cmd>Trouble loclist toggle focus=true<CR>", desc = "Toggle trouble location list" },
-		{ "<leader>xt", "<cmd>Trouble todo toggle focus=true<CR>", desc = "Toggle todos in trouble" },
+		{
+			"[x",
+			function()
+				local trouble = require("trouble")
+				trouble.prev({ focus = false, new = false })
+				trouble.jump_only({ focus = false, new = false })
+			end,
+			desc = "Go to prev item on trouble list",
+		},
 	},
 }

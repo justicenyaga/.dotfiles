@@ -68,37 +68,34 @@ return {
 		-- set keymaps
 		local keymap = vim.keymap -- for conciseness
 
-		keymap.set("n", "<leader>ff", custom_find_files, { desc = "Fuzzy find files in cwd" })
-		keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = "Fuzzy find recent files" })
-		keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "Find string in cwd" })
-		keymap.set("n", "<leader>fc", builtin.grep_string, { desc = "Find string under cursor in cwd" })
-		keymap.set("n", "<leader>fy", builtin.lsp_dynamic_workspace_symbols, { desc = "Fuzy find workspace symbols" })
-		keymap.set("n", "<leader>fY", builtin.lsp_document_symbols, { desc = "Fuzy find document symbols" })
-		keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume the last telescope list" })
-		keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Fuzzy find todos" })
+		keymap.set("n", "<leader>ff", custom_find_files, { desc = "Find files in cwd" })
+		keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = "Find recent files" })
+		keymap.set("n", "<leader>f/", builtin.live_grep, { desc = "Grep in cwd" })
+		keymap.set("n", "<leader>fc", builtin.grep_string, { desc = "Grep word under cursor in cwd" })
+		keymap.set("n", "<leader>fs", builtin.lsp_dynamic_workspace_symbols, { desc = "Find workspace symbols" })
+		keymap.set("n", "<leader>fS", builtin.lsp_document_symbols, { desc = "Find document symbols" })
+		keymap.set("n", "<leader>fl", builtin.resume, { desc = "Resume the last find/grep session" })
+		keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Find todos" })
 
 		keymap.set("n", "<leader>fn", function()
 			builtin.find_files({ cwd = vim.fn.stdpath("config") })
-		end, { desc = "Fuzzy find neovim config files" })
+		end, { desc = "Find files in neovim config dir" })
 
 		keymap.set("n", "<leader>fo", function()
 			builtin.find_files({ search_dirs = { "~/obsidian/notes", "~/obsidian/inbox" } })
-		end, { desc = "Find files in notes dirs" })
-		keymap.set("n", "<leader>fz", function()
-			builtin.live_grep({ search_dirs = { "~/obsidian/notes", "~/obsidian/inbox" } })
-		end, { desc = "Find string in notes dirs" })
+		end, { desc = "Find files in obsidian vault" })
 
-		keymap.set("n", "<leader>/", function()
+		keymap.set("n", "<leader>fb", function()
 			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 				previewer = false,
 			}))
-		end, { desc = "Fuzzily search in current buffer" })
+		end, { desc = "Grep in current buffer" })
 
-		keymap.set("n", "<leader>s/", function()
+		keymap.set("n", "<leader>fB", function()
 			builtin.live_grep({
 				grep_open_files = true,
 				prompt_title = "Live Grep in Open Files",
 			})
-		end, { desc = "Search in Open files" })
+		end, { desc = "Grep in open buffers" })
 	end,
 }
