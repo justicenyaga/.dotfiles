@@ -10,9 +10,6 @@ return {
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
 
-		-- function to ignore the jdtls
-		local noop = function() end
-
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -112,7 +109,7 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-			["jdtls"] = noop,
+			["jdtls"] = function() end, --ignore jdtls
 		})
 
 		-- configure clangd server
@@ -229,7 +226,7 @@ return {
 		})
 
 		-- configure typescript server with plugin
-		lspconfig["tsserver"].setup({
+		lspconfig["ts_ls"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 			handlers = {

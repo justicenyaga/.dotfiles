@@ -6,6 +6,7 @@ return {
 		"mxsdev/nvim-dap-vscode-js",
 		{
 			"microsoft/vscode-js-debug",
+			opt = {},
 			build = "npm i --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 		},
 	},
@@ -171,14 +172,6 @@ return {
 		end, { desc = "Close debugger and end debugging session" })
 
 		dapui.setup({
-			icons = { expanded = "▾", collapsed = "▸" },
-			mappings = {
-				open = "o",
-				remove = "d",
-				edit = "e",
-				repl = "r",
-				toggle = "t",
-			},
 			expand_lines = vim.fn.has("nvim-0.7"),
 			layouts = {
 				{
@@ -198,16 +191,7 @@ return {
 				},
 			},
 			floating = {
-				max_height = nil,
-				max_width = nil,
-				border = "single",
-				mappings = {
-					close = { "q", "<Esc>" },
-				},
-			},
-			windows = { indent = 1 },
-			render = {
-				max_type_length = nil,
+				border = "rounded",
 			},
 		})
 	end,

@@ -1,15 +1,12 @@
-local jdtls_bin = vim.fn.stdpath("data") .. "/mason/bin/jdtls"
-
 local keymap = vim.keymap -- for conciseness
 
-local opts = { noremap = true, silent = true }
-
-local lsp_attach = function(client, bufnr)
+local on_attach = function(client, bufnr)
 	require("jdtls.dap").setup_dap_main_class_configs() -- Discover main classes for debugging
 
 	-- populate workspace diagnostics when lsp client is attached
 	require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
 
+	local opts = { noremap = true, silent = true }
 	opts.buffer = bufnr
 
 	-- set keybinds
@@ -45,9 +42,8 @@ local lsp_attach = function(client, bufnr)
 end
 
 local config = {
-	cmd = { jdtls_bin },
-	root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
-	on_attach = lsp_attach,
+	cmd = { vim.fn.stdpath("data") .. "/mason/bin/jdtls" },
+	on_attach = on_attach,
 	init_options = {
 		bundles = {
 			vim.fn.glob(

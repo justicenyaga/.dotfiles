@@ -10,6 +10,7 @@ return {
 				autosave_changes = true,
 			},
 			float = {
+				preview_split = "right",
 				override = function(conf)
 					local opts = {
 						width = 35,

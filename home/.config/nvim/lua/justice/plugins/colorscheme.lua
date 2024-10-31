@@ -30,6 +30,7 @@ return {
 				sidebars = "transparent",
 				floats = "transparent",
 			},
+			terminal_colors = false,
 			on_colors = function(colors)
 				colors.bg_highlight = "#143652"
 				colors.bg_search = "#0A64AC"
