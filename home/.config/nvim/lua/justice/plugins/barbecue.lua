@@ -2,10 +2,7 @@ return {
 	"utilyre/barbecue.nvim",
 	name = "barbecue",
 	version = "*",
-	dependencies = {
-		"SmiteshP/nvim-navic",
-		"nvim-tree/nvim-web-devicons", -- optional dependency
-	},
+	dependencies = { "SmiteshP/nvim-navic" },
 	config = function()
 		-- triggers CursorHold event faster
 		vim.opt.updatetime = 200
