@@ -1,7 +1,9 @@
 return {
 	"stevearc/oil.nvim",
 	config = function()
-		require("oil").setup({
+		local oil = require("oil")
+
+		oil.setup({
 			default_file_explorer = true,
 			delete_to_trash = true,
 			watch_for_changes = true,
@@ -25,13 +27,16 @@ return {
 				["h"] = "actions.parent",
 				["l"] = "actions.select",
 				["H"] = "actions.open_cwd",
+				["S"] = oil.save,
 				["<C-d>"] = "actions.preview_scroll_down",
 				["<C-u>"] = "actions.preview_scroll_up",
 				["<C-r>"] = "actions.refresh",
 			},
 		})
 
-		vim.keymap.set("n", "<leader>ee", ":Oil --float .<cr>")
-		vim.keymap.set("n", "<leader>ef", ":Oil --float<cr>")
+		vim.keymap.set("n", "<leader>ee", function()
+			oil.toggle_float(".")
+		end, { desc = "Toggle file explorer" })
+		vim.keymap.set("n", "<leader>ef", oil.toggle_float, { desc = "Toggle file explorer on current file" })
 	end,
 }
