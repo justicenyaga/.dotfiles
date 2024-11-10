@@ -25,6 +25,12 @@ set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- spli
 set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
 set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
 
+-- Move to window using <Ctrl> hjkl keys in terminal mode
+set("t", "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Go to left window" })
+set("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Go to lower window" })
+set("t", "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Go to upper window" })
+set("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Go to right window" })
+
 -- Resize window
 set("n", "<C-up>", "<C-w>+", { desc = "Increase window height" })
 set("n", "<C-down>", "<C-w>-", { desc = "Decrease window height" })
