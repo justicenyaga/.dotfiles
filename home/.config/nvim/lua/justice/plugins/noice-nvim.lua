@@ -50,7 +50,7 @@ return {
 			routes = {
 				{
 					filter = {
-						event = "msg_show",
+						event = { "msg_show", "notify" },
 						any = {
 							{ find = "%d+L, %d+B" },
 							{ find = "; after #%d+" },
@@ -59,6 +59,7 @@ return {
 							{ find = "%d more lines" },
 							{ find = "DBUI" },
 							{ find = "DB:" },
+							{ find = "No information available" },
 						},
 					},
 					opts = { skip = true },
