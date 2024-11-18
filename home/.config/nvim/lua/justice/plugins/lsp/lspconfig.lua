@@ -57,6 +57,8 @@ return {
 			-- populate workspace diagnostics when lsp client is attached
 			wd.populate_workspace_diagnostics(client, bufnr)
 
+			vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+
 			opts.buffer = bufnr
 
 			-- set keybinds
@@ -116,6 +118,11 @@ return {
 		lspconfig["clangd"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			settings = {
+				InlayHints = {
+					ParameterNames = true,
+				},
+			},
 		})
 
 		-- configure css server
@@ -151,6 +158,10 @@ return {
 					analyses = {
 						unusedparams = true,
 					},
+					hints = {
+						parameterNames = true,
+						constantValues = true,
+					},
 					-- staticcheck = true,
 				},
 			},
@@ -185,6 +196,11 @@ return {
 							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 							[vim.fn.stdpath("config") .. "/lua"] = true,
 						},
+					},
+					hint = {
+						enable = true,
+						arrayIndex = "Disable",
+						await = false,
 					},
 				},
 			},
@@ -243,6 +259,22 @@ return {
 					end
 					vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
 				end,
+			},
+			settings = {
+				typescript = {
+					inlayHints = {
+						includeInlayParameterNameHints = "all",
+						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+						includeInlayEnumMemberValueHints = true,
+					},
+				},
+				javascript = {
+					inlayHints = {
+						includeInlayParameterNameHints = "all",
+						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+						includeInlayEnumMemberValueHints = true,
+					},
+				},
 			},
 		})
 	end,

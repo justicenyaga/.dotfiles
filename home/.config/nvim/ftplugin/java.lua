@@ -44,6 +44,25 @@ end
 local config = {
 	cmd = { vim.fn.stdpath("data") .. "/mason/bin/jdtls" },
 	on_attach = on_attach,
+	handlers = {
+		["language/status"] = function(_, result, ctx, _)
+			if result.type == "ServiceReady" then
+				for _, bufnr in ipairs(vim.lsp.get_buffers_by_client_id(ctx.client_id)) do
+					vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+				end
+			end
+		end,
+	},
+	settings = {
+		java = {
+			inlayHints = {
+				parameterNames = {
+					enabled = "all",
+				},
+			},
+		},
+	},
 	init_options = {
 		bundles = {
 			vim.fn.glob(
