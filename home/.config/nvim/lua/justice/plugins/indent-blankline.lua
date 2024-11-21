@@ -51,7 +51,6 @@ return {
 			},
 			options = {
 				border = "both",
-				indent_at_cursor = false,
 			},
 			mappings = {
 				object_scope = "ib",
