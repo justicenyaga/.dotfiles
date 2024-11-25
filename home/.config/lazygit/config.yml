@@ -14,3 +14,4 @@ git:
     showWholeGraph: true
 update:
   days: 28
+disableStartupPopups: true
