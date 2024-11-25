@@ -15,6 +15,16 @@ set("n", "<ESC>", ":nohl<CR>", { desc = "Clear search highlights" })
 -- Select All
 set("n", "<C-a>", "gg<S-v>G", { desc = "Select All" })
 
+-- Move cursor in insert mode
+set("i", "<C-h>", "<Left>", { desc = "Move cursor to the left" })
+set("i", "<C-j>", "<Down>", { desc = "Move cursor down" })
+set("i", "<C-k>", "<Up>", { desc = "Move cursor up" })
+set("i", "<C-l>", "<Right>", { desc = "Move cursor to the right" })
+
+-- Horizontal scroll
+set("n", "<left>", "zH", { desc = "Scroll left" })
+set("n", "<right>", "zL", { desc = "Scroll right" })
+
 -- increment/decrement numbers
 set("n", "+", "<C-a>", { desc = "Increment number" }) -- increment
 set("n", "-", "<C-x>", { desc = "Decrement number" }) -- decrement
