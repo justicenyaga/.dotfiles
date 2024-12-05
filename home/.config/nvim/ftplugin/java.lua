@@ -3,9 +3,6 @@ local keymap = vim.keymap -- for conciseness
 local on_attach = function(client, bufnr)
 	require("jdtls.dap").setup_dap_main_class_configs() -- Discover main classes for debugging
 
-	-- populate workspace diagnostics when lsp client is attached
-	require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-
 	local opts = { noremap = true, silent = true }
 	opts.buffer = bufnr
 

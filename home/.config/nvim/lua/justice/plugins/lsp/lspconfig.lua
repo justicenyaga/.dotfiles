@@ -3,7 +3,6 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
-		"artemave/workspace-diagnostics.nvim",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
 	config = function()
@@ -13,27 +12,6 @@ return {
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-		-- setup workspace-diagnostics
-		local wd = require("workspace-diagnostics")
-
-		wd.setup({
-			workspace_files = function()
-				-- search upward through parent dirs until ".git" dir is found
-				local is_git_repo = vim.fn.finddir(".git", vim.fn.expand("%:p:h") .. ";") ~= ""
-
-				local cwd = vim.fn.getcwd() -- current working dir
-
-				local files_cmd = ""
-				if is_git_repo then
-					files_cmd = "git ls-files " .. cwd
-				else
-					files_cmd = "find " .. cwd .. " -type f -print | sed 's|^" .. cwd .. "/||'"
-				end
-
-				return vim.fn.split(vim.fn.system(files_cmd), "\n")
-			end,
-		})
-
 		local keymap = vim.keymap -- for conciseness
 
 		require("lspconfig.ui.windows").default_options.border = "rounded"
@@ -41,22 +19,8 @@ return {
 			float = { border = "rounded" },
 		})
 
-		-- Populate workspace diagnostics via keymap
-		keymap.set("n", "<leader>xw", "", {
-			desc = "Populate workspace diagnostics",
-			noremap = true,
-			callback = function()
-				for _, c in ipairs(vim.lsp.get_clients()) do
-					wd.populate_workspace_diagnostics(c, 0)
-				end
-			end,
-		})
-
 		local opts = { noremap = true, silent = true }
 		local on_attach = function(client, bufnr)
-			-- populate workspace diagnostics when lsp client is attached
-			wd.populate_workspace_diagnostics(client, bufnr)
-
 			vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 
 			opts.buffer = bufnr
