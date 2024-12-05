@@ -1,5 +1,7 @@
 return {
-	"hrsh7th/nvim-cmp",
+	-- "hrsh7th/nvim-cmp",
+	"yioneko/nvim-cmp",
+	branch = "perf",
 	event = { "InsertEnter", "CmdlineEnter" },
 	dependencies = {
 		"hrsh7th/cmp-buffer", -- source for text in buffer
@@ -25,6 +27,8 @@ return {
 
 		-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
 		require("luasnip.loaders.from_vscode").lazy_load()
+
+		require("luasnip").filetype_extend("typescript", { "loremipsum" })
 
 		cmp.setup({
 			window = {
@@ -64,7 +68,7 @@ return {
 			}),
 			-- sources for autocompletion
 			sources = cmp.config.sources({
-				{ name = "codeium" },
+				-- { name = "codeium" },
 				-- { name = "copilot" }, -- copilot
 				{ name = "nvim_lsp" }, -- language server
 				{ name = "vim-dadbod-completion" },
