@@ -51,8 +51,11 @@ return {
 				hl["@constant"] = { fg = "#ffb0b0" }
 				hl["@tag"] = { fg = "#94bdff" }
 				hl["@tag.javascript"] = { fg = "#94bdff" }
+				hl["@tag.tsx"] = { fg = "#94bdff" }
+				hl["@tag.builtin.tsx"] = { fg = "#94bdff" }
 				hl["@tag.builtin.javascript"] = { fg = "#94bdff" }
 				hl["@tag.delimiter"] = { fg = "#94bdff" }
+				hl["@tag.delimiter.tsx"] = { fg = "#94bdff" }
 				hl["DiffAdd"] = { bg = "#20303b" }
 				hl["DiffChange"] = { bg = "#1f2231" }
 				hl["DiffDelete"] = { bg = "#37222c" }

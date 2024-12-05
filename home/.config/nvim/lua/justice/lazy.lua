@@ -11,10 +11,16 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-	{ import = "justice.plugins" },
-	{ import = "justice.plugins.lsp" },
-}, {
+local plugins = {
+	{ import = "justice.vscode_plugins" },
+}
+
+if not vim.g.vscode then
+	table.insert(plugins, { import = "justice.plugins" })
+	table.insert(plugins, { import = "justice.plugins.lsp" })
+end
+
+require("lazy").setup(plugins, {
 	install = {
 		colorscheme = { "tokyonight" },
 	},
