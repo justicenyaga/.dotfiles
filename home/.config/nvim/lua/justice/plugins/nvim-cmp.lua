@@ -42,6 +42,11 @@ return {
 			completion = {
 				completeopt = "menu,menuone,preview,noinsert",
 			},
+			performance = {
+				debounce = 0,
+				throttle = 0,
+				max_view_entries = 10,
+			},
 			snippet = { -- configure how nvim-cmp interacts with snippet engine
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
