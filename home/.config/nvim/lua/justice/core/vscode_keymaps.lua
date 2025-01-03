@@ -6,6 +6,7 @@ keymap({ "n", "v" }, "<leader>a", "<cmd>lua require('vscode').action('editor.act
 keymap({ "n", "v" }, "<leader>ee", "<cmd>lua require('vscode').action('workbench.view.explorer')<CR>")
 keymap({ "n", "v" }, "<leader>xx", "<cmd>lua require('vscode').action('workbench.actions.view.problems')<CR>")
 keymap({ "n", "v" }, "<leader>ff", "<cmd>lua require('vscode').action('workbench.action.quickOpen')<CR>")
+keymap({ "n", "v" }, "<leader>f/", "<cmd>lua require('vscode').action('workbench.action.findInFiles')<CR>")
 keymap({ "n", "v" }, "<leader>rf", "<cmd>lua require('vscode').action('code-runner.run')<CR>")
 keymap("n", "<leader>fs", "<cmd>lua require('vscode').action('workbench.action.showAllSymbols')<CR>")
 keymap({ "n", "v" }, "<leader>sv", "<cmd>lua require('vscode').action('workbench.action.splitEditorRight')<CR>")
