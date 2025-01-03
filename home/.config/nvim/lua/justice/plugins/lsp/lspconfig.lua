@@ -68,15 +68,25 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
-		require("mason-lspconfig").setup_handlers({
+		-- Servers to ignore setting up
+		local disabled_servers = {
+			"jdtls", -- setup using jdtls plugin
+			"ts_ls", -- setup using typescript-tools
+		}
+
+		local disabled_handlers = {}
+		for _, server in ipairs(disabled_servers) do
+			disabled_handlers[server] = function() end
+		end
+
+		require("mason-lspconfig").setup_handlers(vim.tbl_extend("force", {
 			function(server_name)
 				lspconfig[server_name].setup({
 					on_attach = on_attach,
 					capabilities = capabilities,
 				})
 			end,
-			["jdtls"] = function() end, --ignore jdtls
-		})
+		}, disabled_handlers))
 
 		-- configure clangd server
 		lspconfig["clangd"].setup({
@@ -203,43 +213,6 @@ return {
 		lspconfig["tailwindcss"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
-		})
-
-		-- configure typescript server with plugin
-		lspconfig["ts_ls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			handlers = {
-				["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
-					if result.diagnostics ~= nil then
-						local idx = 1
-						while idx <= #result.diagnostics do
-							if result.diagnostics[idx].code == 80001 then
-								table.remove(result.diagnostics, idx)
-							else
-								idx = idx + 1
-							end
-						end
-					end
-					vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
-				end,
-			},
-			settings = {
-				typescript = {
-					inlayHints = {
-						includeInlayParameterNameHints = "all",
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						includeInlayEnumMemberValueHints = true,
-					},
-				},
-				javascript = {
-					inlayHints = {
-						includeInlayParameterNameHints = "all",
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						includeInlayEnumMemberValueHints = true,
-					},
-				},
-			},
 		})
 	end,
 }
