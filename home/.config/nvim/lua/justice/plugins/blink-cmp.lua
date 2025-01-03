@@ -54,6 +54,7 @@ return {
 					},
 					luasnip = {
 						name = "Luasnip",
+						enabled = false,
 						module = "blink.cmp.sources.luasnip",
 						score_offset = 0,
 						max_items = 80,
