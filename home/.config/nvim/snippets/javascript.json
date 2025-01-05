@@ -20,6 +20,24 @@
       "export default ${TM_FILENAME_BASE}"
     ]
   },
+  "typescriptReactArrowFunctionComponent": {
+    "prefix": "trafc",
+    "description": "Creates a React Arrow Function Component with TypeScript",
+    "body": [
+      "import React, { FC, ReactElement } from 'react';",
+      "",
+      "export const ${1:${TM_FILENAME_BASE}}: FC = (): ReactElement => {",
+      "  return (",
+      "    <div>${1}${2}</div>",
+      "  );",
+      "};"
+    ]
+  },
+  "destructureReactProps": {
+    "prefix": "drp",
+    "description": "Destructure props in a React component",
+    "body": ["const { $1 } = props;"]
+  },
   "Material Community Icons": {
     "prefix": "imc",
     "body": ["import { MaterialCommunityIcons } from '@expo/vector-icons';"]
