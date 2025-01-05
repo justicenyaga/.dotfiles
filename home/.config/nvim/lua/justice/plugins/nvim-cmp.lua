@@ -1,7 +1,5 @@
 return {
-	-- "hrsh7th/nvim-cmp",
-	"yioneko/nvim-cmp",
-	branch = "perf",
+	"hrsh7th/nvim-cmp",
 	event = { "InsertEnter", "CmdlineEnter" },
 	dependencies = {
 		"hrsh7th/cmp-buffer", -- source for text in buffer
@@ -34,6 +32,10 @@ return {
 		cmp.setup({
 			window = {
 				documentation = cmp.config.window.bordered(),
+				completion = {
+					col_offset = -3,
+					side_padding = 0,
+				},
 			},
 			view = {
 				entries = {
@@ -46,12 +48,14 @@ return {
 			performance = {
 				debounce = 0,
 				throttle = 0,
-				max_view_entries = 10,
 			},
 			snippet = { -- configure how nvim-cmp interacts with snippet engine
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
 				end,
+			},
+			matching = {
+				disallow_partial_fuzzy_matching = false, -- Allow partial matching without prefix matching
 			},
 			mapping = cmp.mapping.preset.insert({
 				["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
@@ -74,18 +78,29 @@ return {
 			}),
 			-- sources for autocompletion
 			sources = cmp.config.sources({
-				-- { name = "codeium" },
+				{ name = "codeium" }, -- codeium
 				-- { name = "copilot" }, -- copilot
-				{ name = "nvim_lsp" }, -- language server
+				-- language server
+				{
+					name = "nvim_lsp",
+					-- Filter out jsx snippets
+					entry_filter = function(entry, _)
+						local filetype = vim.bo.filetype
+						local isJSX = filetype == "javascriptreact" or filetype == "typescriptreact"
+						local isSnippet = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] == "Snippet"
+						return not (isJSX and isSnippet)
+					end,
+				},
 				{ name = "vim-dadbod-completion" },
-				{ name = "luasnip" }, -- snippets
+				{ name = "luasnip", max_item_count = 5 }, -- snippets
 				{ name = "buffer" }, -- text within current buffer
 				{ name = "path" }, -- file system paths
 			}),
 			-- configure lspkind for vs-code like pictograms in completion menu
 			formatting = {
+				fields = { "kind", "abbr", "menu" },
 				format = function(entry, item)
-					item = lspkind.cmp_format({
+					local kind = lspkind.cmp_format({
 						mode = "symbol",
 						maxwidth = 50,
 						ellipsis_char = "...",
@@ -99,6 +114,11 @@ return {
 						item.kind_hl_group = color_item.abbr_hl_group
 						item.kind = color_item.abbr
 					end
+
+					local strings = vim.split(kind.kind, "%s", { trimempty = true })
+					item.kind = " " .. (strings[1] or "") .. " "
+					item.menu = ""
+
 					return item
 				end,
 			},
