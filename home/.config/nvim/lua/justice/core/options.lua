@@ -60,7 +60,7 @@ opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or 
 opt.clipboard = "unnamedplus" -- use system clipboard as default register
 
 -- Use clip on wsl
-if vim.fn.has("wsl") == 1 then
+if vim.fn.has("wsl") == 1 and not vim.g.vscode then
 	vim.g.clipboard = {
 		name = "WslClipboard",
 		copy = {
