@@ -7,7 +7,11 @@ return {
 		build = "cd app && yarn install",
 		init = function()
 			vim.g.mkdp_filetypes = { "markdown" }
-			vim.g.mkdp_browser = "google-chrome-stable"
+			if vim.fn.has('wsl') == 1 then
+				vim.g.mkdp_browser = "chrome"
+			else
+				vim.g.mkdp_browser = "google-chrome-stable"
+			end
 		end,
 		keys = {
 			{

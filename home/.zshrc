@@ -32,6 +32,10 @@ alias oo="cd $HOME/obsidian"
 alias or="nvim -p $HOME/obsidian/inbox/*.md"
 [[ "$TERM" = "xterm-kitty" ]] && [[ -z $TMUX ]] && alias ssh="kitty +kitten ssh"
 
+# add chrome alias if in a WSL environment
+if which powershell.exe &>/dev/null; then
+  alias chrome="/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe" 
+fi
 
 # gem
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
