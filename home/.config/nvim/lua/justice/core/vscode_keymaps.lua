@@ -13,10 +13,6 @@ keymap({ "n", "v" }, "<leader>sv", "<cmd>lua require('vscode').action('workbench
 keymap({ "n", "v" }, "<leader>sh", "<cmd>lua require('vscode').action('workbench.action.splitEditorDown')<CR>")
 -- keymap({ "n", "v" }, "<leader>fd", "<cmd>lua require('vscode').action('editor.action.formatDocument')<CR>")
 
-keymap("n", "<C-h>", "<cmd>lua require('vscode').action('workbench.action.focusLeftGroup')<CR>")
-keymap("n", "<C-j>", "<cmd>lua require('vscode').action('workbench.action.focusBelowGroup')<CR>")
-keymap("n", "<C-k>", "<cmd>lua require('vscode').action('workbench.action.focusAboveGroup')<CR>")
-keymap("n", "<C-l>", "<cmd>lua require('vscode').action('workbench.action.focusRightGroup')<CR>")
 
 -- harpoon keymaps
 keymap({ "n", "v" }, "<leader>ha", "<cmd>lua require('vscode').action('vscode-harpoon.addEditor')<CR>")
