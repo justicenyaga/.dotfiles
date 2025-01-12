@@ -17,6 +17,9 @@ keymap({ "n", "v" }, "<leader>xx", "<cmd>lua require('vscode').action('workbench
 keymap({ "n", "v" }, "]d", "<cmd>lua require('vscode').action('editor.action.marker.nextInFiles')<CR>")
 keymap({ "n", "v" }, "[d", "<cmd>lua require('vscode').action('editor.action.marker.prevInFiles')<CR>")
 
+-- Lazygit
+keymap("n", "<leader>lg", "<cmd>lua require('vscode').action('lazygit.openLazygit')<CR>")
+
 -- harpoon keymaps
 keymap({ "n", "v" }, "<leader>ha", "<cmd>lua require('vscode').action('vscode-harpoon.addEditor')<CR>")
 keymap({ "n", "v" }, "<leader>he", "<cmd>lua require('vscode').action('vscode-harpoon.editEditors')<CR>")
