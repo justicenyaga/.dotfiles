@@ -4,7 +4,6 @@ keymap({ "n", "v" }, "<C-t>", "<cmd>lua require('vscode').action('workbench.acti
 keymap({ "n", "v" }, "<leader>rn", "<cmd>lua require('vscode').action('editor.action.rename')<CR>")
 keymap({ "n", "v" }, "<leader>a", "<cmd>lua require('vscode').action('editor.action.quickFix')<CR>")
 keymap({ "n", "v" }, "<leader>ee", "<cmd>lua require('vscode').action('workbench.view.explorer')<CR>")
-keymap({ "n", "v" }, "<leader>xx", "<cmd>lua require('vscode').action('workbench.actions.view.problems')<CR>")
 keymap({ "n", "v" }, "<leader>ff", "<cmd>lua require('vscode').action('workbench.action.quickOpen')<CR>")
 keymap({ "n", "v" }, "<leader>f/", "<cmd>lua require('vscode').action('workbench.action.findInFiles')<CR>")
 keymap({ "n", "v" }, "<leader>rf", "<cmd>lua require('vscode').action('code-runner.run')<CR>")
@@ -13,6 +12,10 @@ keymap({ "n", "v" }, "<leader>sv", "<cmd>lua require('vscode').action('workbench
 keymap({ "n", "v" }, "<leader>sh", "<cmd>lua require('vscode').action('workbench.action.splitEditorDown')<CR>")
 -- keymap({ "n", "v" }, "<leader>fd", "<cmd>lua require('vscode').action('editor.action.formatDocument')<CR>")
 
+-- Diagnostics
+keymap({ "n", "v" }, "<leader>xx", "<cmd>lua require('vscode').action('workbench.actions.view.problems')<CR>")
+keymap({ "n", "v" }, "]d", "<cmd>lua require('vscode').action('editor.action.marker.nextInFiles')<CR>")
+keymap({ "n", "v" }, "[d", "<cmd>lua require('vscode').action('editor.action.marker.prevInFiles')<CR>")
 
 -- harpoon keymaps
 keymap({ "n", "v" }, "<leader>ha", "<cmd>lua require('vscode').action('vscode-harpoon.addEditor')<CR>")
