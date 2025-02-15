@@ -29,6 +29,10 @@ return {
 		-- Add lorem ipsum snippets to all file types
 		require("luasnip").filetype_extend("all", { "loremipsum" })
 
+		-- Disable completion on certain file types
+		local disabled_filetypes = { "gitcommit", "minifiles" }
+		cmp.setup.filetype(disabled_filetypes, { enabled = false })
+
 		cmp.setup({
 			window = {
 				documentation = cmp.config.window.bordered(),
