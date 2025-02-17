@@ -1,5 +1,6 @@
 return {
 	"justicenyaga/arrow.nvim",
+	enabled = false,
 	config = function()
 		require("arrow").setup({
 			leader_key = "m",
