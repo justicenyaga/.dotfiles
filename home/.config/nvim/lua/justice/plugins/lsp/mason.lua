@@ -42,6 +42,7 @@ return {
 				"gopls",
 				"graphql",
 				"html",
+				"lemminx",
 				"lua_ls",
 				"prismals",
 				"pyright",
