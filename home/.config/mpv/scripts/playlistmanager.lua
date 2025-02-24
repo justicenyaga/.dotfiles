@@ -22,7 +22,7 @@ local settings = {
 	key_unselectfile = "V",
 	key_playfile = "ENTER",
 	key_removefile = "d",
-	key_closeplaylist = "ESC ctrl+p",
+	key_closeplaylist = "ESC q ctrl+p",
 
 	-- extra functionality keys
 	key_sortplaylist = "",
