@@ -12,6 +12,7 @@ return {
 		statuscolumn = {
 			enabled = true,
 			folds = { open = true },
+			right = { "git", "fold" },
 		},
 		styles = {
 			input = {
@@ -58,6 +59,102 @@ return {
 				Snacks.lazygit()
 			end,
 			desc = "Open lazygit",
+		},
+		{
+			"<leader><space>",
+			function()
+				Snacks.picker.smart()
+			end,
+			desc = "Smart find files",
+		},
+		{
+			"<leader>ff",
+			function()
+				Snacks.picker.files({ hidden = true, follow = true })
+			end,
+			desc = "Find files in cwd",
+		},
+		{
+			"<leader>f.",
+			function()
+				Snacks.picker.recent()
+			end,
+			desc = "Find recent files",
+		},
+		{
+			"<leader>f/",
+			function()
+				Snacks.picker.grep()
+			end,
+			desc = "Grep in cwd",
+		},
+		{
+			"<leader>fs",
+			function()
+				Snacks.picker.lsp_workspace_symbols()
+			end,
+			desc = "Find workspace symbols",
+		},
+		{
+			"<leader>fS",
+			function()
+				Snacks.picker.lsp_symbols()
+			end,
+			desc = "Find document symbols",
+		},
+		{
+			"<leader>fb",
+			function()
+				Snacks.picker.buffers()
+			end,
+			desc = "Find buffers",
+		},
+		{
+			"<leader>fl",
+			function()
+				Snacks.picker.resume()
+			end,
+			desc = "Resume",
+		},
+		{
+			"<leader>fk",
+			function()
+				Snacks.picker.keymaps()
+			end,
+			desc = "Find keymaps",
+		},
+		{
+			"<leader>fe",
+			function()
+				Snacks.picker.explorer()
+			end,
+			desc = "Toggle explorer",
+		},
+		{
+			"<leader>fc",
+			function()
+				Snacks.picker.colorschemes()
+			end,
+			desc = "Colorscheme",
+		},
+		{
+			"<leader>fn",
+			function()
+				Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+			end,
+			desc = "Find nvim config files",
+		},
+		{
+			"<leader>fo",
+			function()
+				Snacks.picker.files({ dirs = { "~/obsidian/notes", "~/obsidian/inbox" }, hidden = true, follow = true })
+			end,
+			desc = "Find obsidian notes",
+		},
+		{
+			"<leader>ft",
+			"<cmd>TodoTelescope<CR>",
+			desc = "Find todos",
 		},
 	},
 }
