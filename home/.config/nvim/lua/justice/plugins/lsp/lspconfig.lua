@@ -6,6 +6,16 @@ return {
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
 	config = function()
+		-- setup nvim-java
+		require("java").setup({
+			jdk = {
+				auto_install = false,
+			},
+			notifications = {
+				dap = false,
+			},
+		})
+
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
 
@@ -68,7 +78,6 @@ return {
 
 		-- Servers to ignore setting up
 		local disabled_servers = {
-			"jdtls", -- setup using jdtls plugin
 			"ts_ls", -- setup using typescript-tools
 		}
 
@@ -139,6 +148,12 @@ return {
 
 		-- configure html server
 		lspconfig["html"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- configure java server
+		lspconfig["jdtls"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})

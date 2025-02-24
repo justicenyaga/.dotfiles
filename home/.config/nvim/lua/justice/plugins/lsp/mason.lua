@@ -42,7 +42,6 @@ return {
 				"gopls",
 				"graphql",
 				"html",
-				"jdtls",
 				"lua_ls",
 				"prismals",
 				"pyright",
