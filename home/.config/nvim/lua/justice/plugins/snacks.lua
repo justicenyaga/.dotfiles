@@ -156,5 +156,40 @@ return {
 			"<cmd>TodoTelescope<CR>",
 			desc = "Find todos",
 		},
+		{
+			"gf",
+			function()
+				Snacks.picker.lsp_references()
+			end,
+			desc = "Show lsp references",
+		},
+		{
+			"gD",
+			function()
+				Snacks.picker.lsp_declarations()
+			end,
+			desc = "Go to declaration",
+		},
+		{
+			"gd",
+			function()
+				Snacks.picker.lsp_definitions()
+			end,
+			desc = "Go to definition",
+		},
+		{
+			"gi",
+			function()
+				Snacks.picker.lsp_implementations()
+			end,
+			desc = "Go to implementation",
+		},
+		{
+			"gt",
+			function()
+				Snacks.picker.lsp_type_definitions()
+			end,
+			desc = "Go to type definition",
+		},
 	},
 }
