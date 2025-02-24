@@ -8,7 +8,34 @@ return {
 		quickfile = { enabled = false },
 		words = { enabled = false },
 		input = { enabled = true },
-		picker = { enabled = true },
+		picker = {
+			enabled = true,
+			formatters = {
+				file = {
+					filename_first = true,
+				},
+			},
+			win = {
+				input = {
+					keys = {
+						["<C-f>"] = { "toggle_follow", mode = { "i", "n" } },
+						["<C-h>"] = { "toggle_hidden", mode = { "i", "n" } },
+						["<C-p>"] = { "toggle_preview", mode = { "i", "n" } },
+						["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+						["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+					},
+				},
+				list = {
+					keys = {
+						["<C-f>"] = "toggle_follow",
+						["<C-h>"] = "toggle_hidden",
+						["<C-p>"] = "toggle_preview",
+						["<C-d>"] = "preview_scroll_down",
+						["<C-u>"] = "preview_scroll_up",
+					},
+				},
+			},
+		},
 		statuscolumn = {
 			enabled = true,
 			folds = { open = true },
