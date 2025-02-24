@@ -7,9 +7,19 @@ return {
 		notifier = { enabled = false },
 		quickfile = { enabled = false },
 		words = { enabled = false },
+		input = { enabled = true },
+		picker = { enabled = true },
 		statuscolumn = {
 			enabled = true,
 			folds = { open = true },
+		},
+		styles = {
+			input = {
+				relative = "cursor",
+				row = 1,
+				col = 0,
+				width = 40,
+			},
 		},
 	},
 	keys = {
