@@ -1,6 +1,5 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	enabled = false,
 	branch = "0.1.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -64,38 +63,5 @@ return {
 
 			builtin.find_files(opts)
 		end
-
-		-- set keymaps
-		local keymap = vim.keymap -- for conciseness
-
-		keymap.set("n", "<leader>ff", custom_find_files, { desc = "Find files in cwd" })
-		keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = "Find recent files" })
-		keymap.set("n", "<leader>f/", builtin.live_grep, { desc = "Grep in cwd" })
-		keymap.set("n", "<leader>fc", builtin.grep_string, { desc = "Grep word under cursor in cwd" })
-		keymap.set("n", "<leader>fs", builtin.lsp_dynamic_workspace_symbols, { desc = "Find workspace symbols" })
-		keymap.set("n", "<leader>fS", builtin.lsp_document_symbols, { desc = "Find document symbols" })
-		keymap.set("n", "<leader>fl", builtin.resume, { desc = "Resume the last find/grep session" })
-		keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Find todos" })
-
-		keymap.set("n", "<leader>fn", function()
-			builtin.find_files({ cwd = vim.fn.stdpath("config") })
-		end, { desc = "Find files in neovim config dir" })
-
-		keymap.set("n", "<leader>fo", function()
-			builtin.find_files({ search_dirs = { "~/obsidian/notes", "~/obsidian/inbox" } })
-		end, { desc = "Find files in obsidian vault" })
-
-		keymap.set("n", "<leader>fb", function()
-			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-				previewer = false,
-			}))
-		end, { desc = "Grep in current buffer" })
-
-		keymap.set("n", "<leader>fB", function()
-			builtin.live_grep({
-				grep_open_files = true,
-				prompt_title = "Live Grep in Open Files",
-			})
-		end, { desc = "Grep in open buffers" })
 	end,
 }

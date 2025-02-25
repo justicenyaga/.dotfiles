@@ -20,9 +20,15 @@ return {
 		-- Set menu
 		dashboard.section.buttons.val = {
 			dashboard.button("e", " New File", "<cmd>ene<CR>"),
-			dashboard.button("SPC ee", " Toggle file explorer", "<cmd>lua MiniFiles.open()<CR>"),
-			dashboard.button("SPC ff", "󰱼 Find File", "<cmd>Telescope find_files<CR>"),
-			dashboard.button("SPC fs", " Find Word", "<cmd>Telescope live_grep<CR>"),
+			dashboard.button("SPC ee", " Toggle file explorer", function()
+				Snacks.picker.explorer()
+			end),
+			dashboard.button("SPC ff", "󰱼 Find File", function()
+				Snacks.picker.files({ hidden = true, follow = true })
+			end),
+			dashboard.button("SPC f/", " Find Word", function()
+				Snacks.picker.grep()
+			end),
 			dashboard.button("SPC wr", "󰁯 Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
 			dashboard.button("q", " Quit NVIM", "<cmd>qa<CR>"),
 		}

@@ -116,6 +116,13 @@ return {
 			desc = "Grep in cwd",
 		},
 		{
+			"<leader>fc",
+			function()
+				Snacks.picker.grep_word()
+			end,
+			desc = "Grep word under cursor",
+		},
+		{
 			"<leader>fs",
 			function()
 				Snacks.picker.lsp_workspace_symbols()
@@ -135,6 +142,13 @@ return {
 				Snacks.picker.buffers()
 			end,
 			desc = "Find buffers",
+		},
+		{
+			"<leader>fB",
+			function()
+				Snacks.picker.grep_buffers()
+			end,
+			desc = "Grep open buffers",
 		},
 		{
 			"<leader>fl",
@@ -158,7 +172,7 @@ return {
 			desc = "Toggle explorer",
 		},
 		{
-			"<leader>fc",
+			"<leader>fC",
 			function()
 				Snacks.picker.colorschemes()
 			end,

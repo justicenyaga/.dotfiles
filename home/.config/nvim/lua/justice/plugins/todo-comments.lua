@@ -1,6 +1,7 @@
 return {
 	"folke/todo-comments.nvim",
 	dependencies = { "nvim-lua/plenary.nvim" },
+	optional = true,
 	config = function()
 		local todo_comments = require("todo-comments")
 
@@ -19,4 +20,13 @@ return {
 			todo_comments.jump_prev()
 		end, { desc = "Previous todo comment" })
 	end,
+	keys = {
+		{
+			"<leader>ft",
+			function()
+				Snacks.picker.todo_comments()
+			end,
+			desc = "Find todos",
+		},
+	},
 }
