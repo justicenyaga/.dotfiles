@@ -165,7 +165,7 @@ return {
 			desc = "Find keymaps",
 		},
 		{
-			"<leader>fe",
+			"<leader>ee",
 			function()
 				Snacks.picker.explorer()
 			end,
