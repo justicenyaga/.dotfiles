@@ -6,7 +6,7 @@ return {
 		bigfile = { enabled = true },
 		notifier = { enabled = false },
 		quickfile = { enabled = false },
-		words = { enabled = false },
+		words = { enabled = true },
 		input = { enabled = true },
 		picker = {
 			enabled = true,
@@ -231,6 +231,20 @@ return {
 				Snacks.picker.lsp_type_definitions()
 			end,
 			desc = "Go to type definition",
+		},
+		{
+			"]]",
+			function()
+				Snacks.words.jump(vim.v.count1)
+			end,
+			desc = "Next reference",
+		},
+		{
+			"[[",
+			function()
+				Snacks.words.jump(-vim.v.count1)
+			end,
+			desc = "Prev reference",
 		},
 	},
 }
