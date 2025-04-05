@@ -8,6 +8,11 @@ return {
 	keys = {
 		{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Toggle trouble list" },
 		{
+			"<leader>xX",
+			"<cmd>Trouble diagnostics filter.severity=vim.diagnostic.severity.ERROR<cr>",
+			desc = "Toggle trouble list ()",
+		},
+		{
 			"<leader>xb",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 			desc = "Toggle buffer trouble list",
