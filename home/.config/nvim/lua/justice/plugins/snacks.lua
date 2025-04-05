@@ -165,13 +165,6 @@ return {
 			desc = "Find keymaps",
 		},
 		{
-			"<leader>ee",
-			function()
-				Snacks.picker.explorer()
-			end,
-			desc = "Toggle explorer",
-		},
-		{
 			"<leader>fC",
 			function()
 				Snacks.picker.colorschemes()

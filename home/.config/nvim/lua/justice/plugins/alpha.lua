@@ -21,7 +21,9 @@ return {
 		dashboard.section.buttons.val = {
 			dashboard.button("e", " New File", "<cmd>ene<CR>"),
 			dashboard.button("SPC ee", " Toggle file explorer", function()
-				Snacks.picker.explorer()
+				if not MiniFiles.close() then
+					MiniFiles.open()
+				end
 			end),
 			dashboard.button("SPC ff", "󰱼 Find File", function()
 				Snacks.picker.files({ hidden = true, follow = true })
