@@ -1,7 +1,6 @@
 return {
 	"saghen/blink.cmp",
 	version = "1.*",
-	build = "cargo build --release",
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 		"saghen/blink.compat",
@@ -23,6 +22,11 @@ return {
 		luasnip.filetype_extend("all", { "loremipsum" })
 
 		require("blink-cmp").setup({
+			enabled = function()
+				local disabled_filetypes =
+					{ "snacks_input", "snacks_picker_list", "snacks_picker_input", "gitcommit", "minifiles" }
+				return not vim.tbl_contains(disabled_filetypes, vim.bo.filetype)
+			end,
 			snippets = {
 				preset = "luasnip",
 				expand = function(snippets)
@@ -47,46 +51,36 @@ return {
 			sources = {
 				default = { "codeium", "lsp", "snippets", "buffer", "path" },
 				providers = {
-					lsp = {
-						name = "LSP",
-						enabled = true,
-						module = "blink.cmp.sources.lsp",
-					},
 					dadbod = {
 						name = "Dadbod",
 						module = "vim_dadbod_completion.blink",
 					},
-					snippets = {
-						name = "snippets",
-						enabled = true,
-						module = "blink.cmp.sources.snippets",
-					},
 					codeium = {
 						name = "codeium",
-						enabled = true, -- TODO: Remove this once codeium source has been fixed
+						enabled = true,
 						module = "blink.compat.source",
 						async = true,
 					},
 				},
 			},
+			signature = {
+				enabled = true,
+				window = { treesitter_highlighting = false },
+			},
 			completion = {
 				list = {
-					selection = {
-						auto_insert = false,
-					},
+					selection = { auto_insert = false },
 				},
 				documentation = {
 					auto_show = true,
-					auto_show_delay_ms = 80,
-					window = {
-						border = "rounded",
-					},
+					auto_show_delay_ms = 20,
+					window = { border = "rounded" },
 				},
 				accept = { auto_brackets = { enabled = true } },
 				menu = {
 					draw = {
 						align_to = "cursor",
-						-- treesitter = { "lsp" },
+						treesitter = { "lsp" },
 						components = {
 							kind_icon = {
 								text = function(ctx)
