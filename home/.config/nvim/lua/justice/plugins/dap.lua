@@ -19,9 +19,6 @@ return {
 		-- import nvim-dap-ui plugin
 		local dapui = require("dapui")
 
-		-- import nvim-notify plugin
-		local notify = require("notify")
-
 		local keymap = vim.keymap -- for conciseness
 
 		dap.set_log_level("INFO") -- Helps when configuring DAP, see logs with :DapShowLog
@@ -159,7 +156,7 @@ return {
 		keymap.set("n", "<F23>", dap.step_out, { desc = "Step Out" }) -- Shift + F11
 		keymap.set("n", "<F21>", function()
 			dap.clear_breakpoints()
-			notify("Breakpoints cleared", "warn")
+			Snacks.notify.info("Breakpoints cleared")
 		end, { desc = "Clear all Breakpoints" }) -- Shift + F9
 
 		-- Close debugger and clear breakpoints
@@ -168,7 +165,7 @@ return {
 			dapui.close({})
 			dap.terminate()
 			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false) --
-			notify("Debug session ended", "warn")
+			Snacks.notify.warn("Debug session ended")
 		end, { desc = "Close debugger and end debugging session" })
 
 		dapui.setup({

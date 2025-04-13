@@ -1,5 +1,6 @@
 return {
 	"folke/todo-comments.nvim",
+	event = "VeryLazy",
 	dependencies = { "nvim-lua/plenary.nvim" },
 	optional = true,
 	config = function()
@@ -23,10 +24,8 @@ return {
 	keys = {
 		{
 			"<leader>ft",
-			function()
-				Snacks.picker.todo_comments()
-			end,
-			desc = "Find todos",
+			"<cmd>TodoQuickFix<cr>",
+			desc = "Open todos on quickfix list",
 		},
 	},
 }

@@ -4,7 +4,7 @@ return {
 	lazy = false,
 	opts = {
 		bigfile = { enabled = true },
-		notifier = { enabled = false },
+		notifier = { enabled = true },
 		quickfile = { enabled = false },
 		words = { enabled = true },
 		input = { enabled = true },
@@ -184,11 +184,6 @@ return {
 				Snacks.picker.files({ dirs = { "~/obsidian/notes", "~/obsidian/inbox" }, hidden = true, follow = true })
 			end,
 			desc = "Find obsidian notes",
-		},
-		{
-			"<leader>ft",
-			"<cmd>TodoTelescope<CR>",
-			desc = "Find todos",
 		},
 		{
 			"gf",

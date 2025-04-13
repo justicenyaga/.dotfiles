@@ -24,28 +24,28 @@ return {
 	priority = 1000,
 	config = function()
 		require("tokyonight").setup({
-			style = "night",
+			style = "moon",
 			terminal_colors = false,
-			on_colors = function(colors)
-				colors.bg_highlight = "#143652"
-				colors.bg_search = "#0A64AC"
-				colors.bg_popup = "#011423"
-				colors.bg_visual = "#275378"
-
-				colors.black = "#152535"
-				colors.red = "#FF3C3C"
-				colors.green = "#49FF6D"
-				colors.yellow = "#FFBC51"
-				colors.blue = "#00AFFF"
-				colors.magenta = "#8E44AD"
-				colors.cyan = "#16A085"
-				colors.fg_dark = "#BDC3C7"
-				colors.terminal_black = "#56616D"
-				colors.fg = "#ffffff"
-				colors.git.add = "#49FF6D"
-				colors.git.change = "#00AFFF"
-				colors.git.delete = "#FF3C3C"
-			end,
+			-- on_colors = function(colors)
+			-- 	colors.bg_highlight = "#143652"
+			-- 	colors.bg_search = "#0A64AC"
+			-- 	colors.bg_popup = "#011423"
+			-- 	colors.bg_visual = "#275378"
+			--
+			-- 	colors.black = "#152535"
+			-- 	colors.red = "#FF3C3C"
+			-- 	colors.green = "#49FF6D"
+			-- 	colors.yellow = "#FFBC51"
+			-- 	colors.blue = "#00AFFF"
+			-- 	colors.magenta = "#8E44AD"
+			-- 	colors.cyan = "#16A085"
+			-- 	colors.fg_dark = "#BDC3C7"
+			-- 	colors.terminal_black = "#56616D"
+			-- 	colors.fg = "#ffffff"
+			-- 	colors.git.add = "#49FF6D"
+			-- 	colors.git.change = "#00AFFF"
+			-- 	colors.git.delete = "#FF3C3C"
+			-- end,
 			on_highlights = function(hl)
 				hl["@custom.readonly.declaration"] = { fg = "#ffb0b0" }
 				hl["@constant"] = { fg = "#ffb0b0" }

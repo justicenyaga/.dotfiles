@@ -1,5 +1,6 @@
 return {
 	"nvim-lualine/lualine.nvim",
+	event = "VeryLazy",
 	config = function()
 		local lualine = require("lualine")
 		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
@@ -13,6 +14,7 @@ return {
 			fg = "#c3ccdc",
 			bg = "#112638",
 			inactive_bg = "#2c3043",
+			semilightgray = "#6c7086",
 		}
 
 		local my_lualine_theme = {
@@ -55,18 +57,6 @@ return {
 			},
 			sections = {
 				lualine_x = {
-					{
-						require("noice").api.statusline.mode.get,
-						cond = function()
-							local mode = require("noice").api.statusline.mode.get()
-							-- only show macro recording status
-							if type(mode) == "string" and mode:match("^recording @") then
-								return true
-							end
-							return false
-						end,
-						color = { fg = "#ff9e64" },
-					},
 					{
 						lazy_status.updates,
 						cond = lazy_status.has_updates,

@@ -1,5 +1,6 @@
 return {
 	"echasnovski/mini.icons",
+	event = "VeryLazy",
 	version = "*",
 	dependencies = {
 		"folke/snacks.nvim",

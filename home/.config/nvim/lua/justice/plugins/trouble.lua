@@ -1,6 +1,7 @@
 return {
 	"folke/trouble.nvim",
 	dependencies = { "folke/todo-comments.nvim" },
+	event = "VeryLazy",
 	cmd = "Trouble",
 	opts = {
 		auto_close = true,

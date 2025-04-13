@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		{ "tpope/vim-dadbod", lazy = true },
 	},
+	event = "VeryLazy",
 	cmd = {
 		"DBUI",
 		"DBUIToggle",
