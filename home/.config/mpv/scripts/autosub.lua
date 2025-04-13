@@ -34,7 +34,7 @@ local languages = {
 --          If you use any of these services, simply uncomment it
 --          and replace 'USERNAME' and 'PASSWORD' with your own:
 local logins = {
-	--          { '--addic7ed', 'USERNAME', 'PASSWORD' },
+	{ "--addic7ed", "justicenyaga", "@Merammwn2" },
 	--          { '--legendastv', 'USERNAME', 'PASSWORD' },
 	--          { '--opensubtitles', 'USERNAME', 'PASSWORD' },
 	--          { '--subscenter', 'USERNAME', 'PASSWORD' },
