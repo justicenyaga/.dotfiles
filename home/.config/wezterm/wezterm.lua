@@ -3,7 +3,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 config.font = wezterm.font("CaskaydiaCove NFM")
-config.font_size = 12
+config.font_size = 10
 
 config.freetype_load_flags = "NO_HINTING"
 config.cell_width = 0.9
