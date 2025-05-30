@@ -8,7 +8,8 @@ git:
     pager: delta --dark --paging=never
   autoFetch: false
   branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --oneline
-  allBranchesLogCmd: git log --all --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline
+  allBranchesLogCmds:
+    - git log --all --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline
   parseEmoji: true
   log:
     showWholeGraph: true
