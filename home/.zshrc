@@ -46,8 +46,19 @@ export GOROOT="/usr/lib/go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$GOROOT/bin"
 
+# flutter
+export PATH="$HOME/.local/flutter/bin:$PATH"
+export PATH="$HOME/.local/android-studio/bin:$PATH"
+
 # java
 export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
+
+# codecompanion - sourced secrets
+if [ -f "$HOME/.zshrc_secrets" ]; then
+  source "$HOME/.zshrc_secrets"
+fi
 
 # flatpak
 # export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:~/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
