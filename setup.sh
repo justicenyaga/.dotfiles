@@ -31,15 +31,15 @@ printf "\nInstalling packages\n"
 sleep 1
 
 
-packages="apple_cursor base bat blueman brave-bin brightnessctl chili-sddm-theme conceal-bin dragon-drop emote
-  eza fd feh ffmpegthumbnailer file-roller fzf glow git-credential-manager-bin git-delta gnome-keyring
-  gnome-system-monitor grim gvfs gvfs-mtp htop hyprland hyprlock hyprpaper i3-wm imagemagick keyd kitty kvantum
-  lazygit man-db mediainfo mercurial mpd mpc mpv neovim net-tools ntfs-3g nwg-look obsidian p7zip pass
+packages="apple_cursor base bat blueman brave-bin brightnessctl btop chili-sddm-theme clang cliphist cmake conceal-bin dragon-drop emote
+  eza fd feh ffmpegthumbnailer file-roller fzf git-credential-manager-bin git-delta glow gnome-keyring
+  gnome-system-monitor google-chrome grim gvfs gvfs-mtp htop hyprland hyprlock hyprpaper i3-wm imagemagick jq keyd kitty kvantum
+  lazygit libxml2-legacy man-db mediainfo mercurial mpd mpc mpv neofetch neovim net-tools ntfs-3g nvm nwg-look nvim-treesitter-parsers-git obsidian p7zip pass
   perl-image-exiftool picom polybar poppler power-profiles-daemon pyenv python-pipenv python-pipx python-pynvim
-  qt6ct ripgrep rofi seahorse shotwell stow thunar thunar-volman timidity++ tmux ttf-cascadia-code ttf-fira-sans
+  qt6ct ripgrep rofi seahorse shotwell stow thunar thunar-volman timidity++ timeshift timeshift-autosnap tmux ttf-cascadia-code ttf-fira-sans
   ttf-jetbrains-mono-nerd ttf-joypixels ttf-meslo-nerd ttf-nerd-fonts-symbols-mono ttf-roboto ttf-terminus-nerd
-  unzip waybar wget wlogout wl-clipboard wofi xclip xdg-user-dirs xfce4-notifyd xfce-polkit xorg-font-util
-  xorg-fonts-misc xorg-mkfontscale yazi zip zoxide zsh"
+  unrar unzip waybar wezterm wget wlogout wl-clipboard wofi xclip xdg-user-dirs xfce4-notifyd xfce-polkit xorg-font-util
+  xorg-fonts-misc xorg-mkfontscale xorg-xhost yazi zip zoxide zsh"
 
 yay -Sy $packages --needed --noconfirm
 
