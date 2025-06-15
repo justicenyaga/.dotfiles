@@ -176,7 +176,8 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $urgent-text-colo
 gaps inner 10
 
 # Monitors
-set $fm HDMI-1
+# set $fm HDMI-1
+set $fm DP-1
 set $sm eDP-1 
 
 # Assign workspaces to monitors
