@@ -231,7 +231,8 @@ bindsym --release XF86PowerOff exec ~/.config/polybar/scripts/powermenu.sh
 bindsym $mod+Shift+q exec ~/.config/polybar/scripts/powermenu.sh
 
 # Program launcher
-bindsym $mod+d exec pgrep wofi >/dev/null 2>&1 && killall wofi || wofi --show drun
+# bindsym $mod+d exec pgrep wofi >/dev/null 2>&1 && killall wofi || wofi --show drun
+bindsym $mod+d exec pgrep rofi >/dev/null 2>&1 && killall rofi || ~/.config/rofi/scripts/launcher_t1
 # Browser
 bindsym $mod+b exec brave-browser
 
