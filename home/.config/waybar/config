@@ -13,7 +13,8 @@
     "hyprland/workspaces"
   ],
   "modules-center": [
-    "clock",
+    "custom/mediaplayer",
+    "clock"
   ],
   "modules-right": [
     "network",

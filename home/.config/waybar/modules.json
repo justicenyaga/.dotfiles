@@ -1,11 +1,29 @@
 {
   "custom/app-launcher": {
     "format": "<span size='16000'></span>",
-    "on-click": "pgrep wofi >/dev/null 2>&1 && killall wofi || wofi --show drun",
+    "on-click": "pgrep rofi >/dev/null 2>&1 && killall rofi || ~/.config/rofi/scripts/launcher_t1",
     "tooltip-format": "Application Launcher"
   },
   "custom/dots": {
     "format": "󰇙"
+  },
+  "custom/mediaplayer": {
+    "format": "{icon} {text}",
+    "return-type": "json",
+    "max-length": 40,
+    "format-icons": {
+      "spotify": "<span color='#1ed760'></span>",
+      "default": "<span color='#7aa2f7'>🎜</span>"
+    },
+    // "exec": "python ~/.config/waybar/mediaplayer.py --player spotify 2> /dev/null",
+    // "on-click": "playerctl -p spotify play-pause",
+    // "on-scroll-down": "playerctl -p spotify next",
+    // "on-scroll-up": "playerctl -p spotify previous",
+    "exec": "python ~/.config/waybar/mediaplayer.py 2> /dev/null",
+    "on-click": "playerctl play-pause",
+    "on-scroll-down": "playerctl next",
+    "on-scroll-up": "playerctl previous",
+    "smooth-scrolling-threshold": 1
   },
   "hyprland/workspaces": {
     "format": "<span size='14000'>{icon}</span>",

@@ -1,8 +1,9 @@
 @import "colors.css";
 
 * {
-  font-family: "Cascadia Mono", "JetBrainsMono Nerd Font", Roboto, Helvetica,
-    Arial, sans-serif;
+  font-family:
+    "Cascadia Mono", "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial,
+    sans-serif;
   font-size: 16px;
 }
 
@@ -13,8 +14,8 @@ window#waybar {
   transition-property: background-color;
 }
 
-.modules-left,
-.modules-center {
+#clock,
+.modules-left {
   border: 3px solid @border;
   background-color: @bg;
   border-radius: 25px;
@@ -56,6 +57,11 @@ window#waybar {
 #tray {
   border-radius: 25px;
   padding-left: 18px;
+}
+
+#custom-mediaplayer {
+  margin: 0px 16px;
+  transition: all 0.3s ease;
 }
 
 #group3 {
