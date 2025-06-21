@@ -8,8 +8,8 @@
     "~/.config/waybar/modules.json"
   ],
   "modules-left": [
-    "custom/app-launcher",
-    "custom/dots",
+    // "custom/app-launcher",
+    // "custom/dots",
     "hyprland/workspaces"
   ],
   "modules-center": [
