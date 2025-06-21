@@ -30,16 +30,16 @@
     "on-click": "activate",
     "all-outputs": true,
     "format-icons": {
-      "1": "<span size='16000'></span>",
-      "2": "<span size='16000'></span>",
-      "3": "<span size='16000'></span>",
-      "4": "<span size='16000'>󰊻</span>",
-      "5": "<span size='16000'>󰴢</span>",
-      "6": "<span size='16000'></span>",
-      "7": "<span size='16000'></span>",
-      "8": "<span size='16000'>󰕼</span>",
-      "9": "<span size='18000'></span>",
-      "10": "<span size='18000'>󰿬</span>"
+      "1": "<span size='16000'>󰲠</span>",
+      "2": "<span size='16000'>󰲢</span>",
+      "3": "<span size='16000'>󰲤</span>",
+      "4": "<span size='16000'>󰲦</span>",
+      "5": "<span size='16000'>󰲨</span>",
+      "6": "<span size='16000'>󰲪</span>",
+      "7": "<span size='16000'>󰲬</span>",
+      "8": "<span size='16000'>󰲮</span>",
+      "9": "<span size='16000'>󰲰</span>",
+      "10": "<span size='16000'>󰿬</span>"
     },
     "sort-by-number": true
   },
@@ -89,7 +89,7 @@
   "backlight": {
     "device": "intel_backlight",
     "format": "<span size='18000'> {icon} </span>",
-    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"],
     "scroll-step": 5,
     "tooltip-format": "Brightness: {percent}%"
   },

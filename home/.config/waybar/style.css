@@ -22,6 +22,10 @@ window#waybar {
   padding: 0 20px;
 }
 
+.modules-left {
+  padding: 0 8px;
+}
+
 #custom-app-launcher {
   color: @blue-arch;
   border-radius: 20px;
@@ -36,6 +40,7 @@ window#waybar {
 
 #workspaces button {
   color: @cyan;
+  padding: 0px 4px;
 }
 
 #workspaces button:hover {
