@@ -242,6 +242,19 @@ config.keys = {
 	-- },
 }
 
+config.mouse_bindings = {
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "NONE",
+		action = wezterm.action.DisableDefaultAssignment,
+	},
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CTRL",
+		action = wezterm.action.OpenLinkAtMouseCursor,
+	},
+}
+
 -- for i = 1, 9 do
 -- 	table.insert(config.keys, {
 -- 		key = tostring(i),
