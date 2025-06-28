@@ -53,7 +53,7 @@ config.default_cursor_style = "BlinkingBar"
 config.color_scheme = "Catppuccin Mocha"
 
 config.font = wezterm.font("CaskaydiaCove NFM")
-config.font_size = 14.5
+config.font_size = 12.5
 
 config.freetype_load_flags = "NO_HINTING"
 config.cell_width = 0.9
