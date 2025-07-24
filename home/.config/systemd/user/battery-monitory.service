@@ -1,0 +1,15 @@
+[Unit]
+Description=Battery Monitor Service
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/home/jnyaga/.local/bin/battery-monitor.sh
+Restart=always
+RestartSec=60
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+Environment=WAYLAND_DISPLAY=wayland-1
+Environment=DISPLAY=:1
+
+[Install]
+WantedBy=default.target

@@ -3,7 +3,7 @@
 # Script to toggle touchpad state
 # Usage: toggle-touchpad.sh [enable|disable|toggle]
 
-TOUCHPAD_DEVICE="dell09be:00-0488:120a-touchpad"
+TOUCHPAD_DEVICE="ven_06cb:00-06cb:cfeb-touchpad"
 
 disable_touchpad() {
     echo "Disabling touchpad: $TOUCHPAD_DEVICE"
