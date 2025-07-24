@@ -54,6 +54,7 @@ export CHROME_EXECUTABLE=microsoft-edge-stable
 
 # java
 export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
+# export JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
 export ANDROID_HOME="$HOME/Android/Sdk"
 export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
 
@@ -119,3 +120,9 @@ _fzf_comprun() {
 
 # bat
 export BAT_THEME="tokyonight_night"
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/jnyaga/.dart-cli-completion/zsh-config.zsh ]] && . /home/jnyaga/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
