@@ -16,5 +16,5 @@
   <property name="date-time-custom-format" type="string" value="%a %H:%M:%S"/>
   <property name="theme" type="string" value="Smoke"/>
   <property name="notification-log" type="bool" value="true"/>
-  <property name="expire-timeout" type="int" value="4"/>
+  <property name="expire-timeout" type="int" value="5"/>
 </channel>
