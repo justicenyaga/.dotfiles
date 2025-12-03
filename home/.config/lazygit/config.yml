@@ -4,15 +4,15 @@ gui:
     selectedLineBgColor:
       - "#292e42"
 git:
-  paging:
-    pager: delta --dark --paging=never
+  pagers:
+    - pager: delta --dark --paging=never
   autoFetch: false
   branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --oneline
   allBranchesLogCmds:
-    - git log --all --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline
+    - git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline
   parseEmoji: true
   log:
-    showWholeGraph: true
+    showWholeGraph: false
 update:
   days: 28
 disableStartupPopups: true
