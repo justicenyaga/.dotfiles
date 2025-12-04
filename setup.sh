@@ -31,17 +31,16 @@ printf "\nInstalling packages\n"
 sleep 1
 
 
-packages="apple_cursor base bat blueman brightnessctl btop chili-sddm-theme clang cliphist cmake conceal-bin dragon-drop 
-  emote eza fd feh ffmpegthumbnailer file-roller fzf git-credential-manager-bin git-delta glow gnome-keyring 
-  gnome-system-monitor google-chrome grim gvfs gvfs-mtp htop hyprland hyprlock hyprpaper hyprshot-git i3-wm 
-  imagemagick jq keyd kitty kvantum lazygit libxml2-legacy man-db mediainfo mercurial microsoft-edge-stable-bin 
-  mpd mpc mpv neofetch neovim net-tools noto-fonts noto-fonts-emoji ntfs-3g nvm nwg-look nvim-treesitter-parsers-git 
-  obsidian outlook-for-linux-bin p7zip pass perl-image-exiftool picom polybar poppler postman power-profiles-daemon 
-  pyenv python-pipenv python-pipx python-pynvim qt6ct ripgrep rofi seahorse shotwell stow teams-for-linux-bin 
-  thunar thunar-volman timidity++ timeshift timeshift-autosnap tmux ttf-cascadia-code ttf-fira-sans ttf-jetbrains-mono-nerd 
-  ttf-joypixels ttf-meslo-nerd ttf-nerd-fonts-symbols-mono ttf-roboto ttf-terminus-nerd unrar unzip waybar wezterm 
-  wget wlogout wl-clipboard wofi xclip xdg-user-dirs xfce4-notifyd xfce-polkit xorg-font-util xorg-fonts-misc 
-  xorg-mkfontscale xorg-xhost yazi zip zoxide zsh"
+packages="ags-hyprpanel-git apple_cursor base bat blueman brave-bin brightnessctl btop chili-sddm-theme clang cliphist cmake 
+  conceal-bin dragon-drop emote eza fd feh ffmpegthumbnailer file-roller fzf git-credential-manager-bin git-delta glow 
+  gnome-keyring gnome-system-monitor google-chrome grim gvfs gvfs-mtp htop hyprland hyprlock hyprpaper hyprshot-git i3-wm 
+  imagemagick jq keyd kitty kvantum lazygit libxml2-legacy man-db mediainfo mercurial mpd mpc mpv neofetch neovim 
+  net-tools noto-fonts noto-fonts-emoji ntfs-3g nvm nwg-look nvim-treesitter-parsers-git obsidian outlook-for-linux-bin
+  p7zip pass perl-image-exiftool picom polybar poppler postman power-profiles-daemon pyenv python-pipenv python-pipx 
+  python-pynvim qt6ct ripgrep rofi seahorse shotwell stow teams-for-linux-bin thunar thunar-volman timidity++ timeshift 
+  timeshift-autosnap tmux ttf-cascadia-code ttf-fira-sans ttf-jetbrains-mono-nerd ttf-joypixels ttf-meslo-nerd 
+  ttf-nerd-fonts-symbols-mono ttf-roboto ttf-terminus-nerd unrar unzip waybar wezterm wget wlogout wl-clipboard wofi xclip 
+  xdg-user-dirs xfce4-notifyd xfce-polkit xorg-font-util xorg-fonts-misc xorg-mkfontscale xorg-xhost yazi zip zoxide zsh"
 
 yay -Sy $packages --needed --noconfirm
 
