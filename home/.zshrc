@@ -50,7 +50,7 @@ export PATH="$PATH:$GOROOT/bin"
 # flutter
 export PATH="$HOME/.local/flutter/bin:$PATH"
 export PATH="$HOME/.local/android-studio/bin:$PATH"
-export CHROME_EXECUTABLE=microsoft-edge-stable
+export CHROME_EXECUTABLE=brave
 
 # java
 export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
