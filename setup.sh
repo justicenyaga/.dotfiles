@@ -32,7 +32,7 @@ sleep 1
 
 
 packages="ags-hyprpanel-git apple_cursor base bat blueman brave-bin brightnessctl btop chili-sddm-theme clang cliphist cmake 
-  conceal-bin dragon-drop emote eza fd feh ffmpegthumbnailer file-roller fzf git-credential-manager-bin git-delta glow 
+  conceal-bin dragon-drop emote eza falkon fd feh ffmpegthumbnailer file-roller fzf git-credential-manager-bin git-delta glow 
   gnome-keyring gnome-system-monitor google-chrome grim gvfs gvfs-mtp htop hyprland hyprlock hyprpaper hyprshot-git i3-wm 
   imagemagick jq keyd kitty kvantum lazygit libxml2-legacy man-db mediainfo mercurial mpd mpc mpv neofetch neovim 
   net-tools noto-fonts noto-fonts-emoji ntfs-3g nvm nwg-look nvim-treesitter-parsers-git obsidian outlook-for-linux-bin
@@ -73,4 +73,4 @@ bat cache --build
 printf "\nInstalling yazi's catppuccin-mocha flavor\n"
 sleep 1
 
-ya pack -a yazi-rs/flavors:catppuccin-mocha
+ya pkg add yazi-rs/flavors:catppuccin-mocha

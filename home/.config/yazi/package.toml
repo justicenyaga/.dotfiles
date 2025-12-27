@@ -1,15 +1,44 @@
-[plugin]
-deps = [
-  { use = "Ape/open-with-cmd", rev = "8d7abc8" }, 
-  { use = "pirafrank/what-size", rev = "f08f7f2" }, 
-  { use = "dedukun/relative-motions", rev = "89d0cb9" }, 
-  { use = "yazi-rs/plugins:full-border", rev = "35100e7" }, 
-  { use = "Reledia/glow", rev = "d8b36ff" }, 
-  { use = "yazi-rs/plugins:max-preview", rev = "35100e7" }, 
-  { use = "yazi-rs/plugins:hide-preview", rev = "35100e7" }
-]
+[[plugin.deps]]
+use = "pirafrank/what-size"
+rev = "d896656"
+hash = "62251f94eb67648d42cdfcfb8be0fad2"
 
-[flavor]
-deps = [
-  { use = "yazi-rs/flavors:catppuccin-mocha", rev = "b081fa9" }
-]
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "05234ed"
+hash = "56fdabc96fc1f4d53c96eb884b02a5be"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-paste"
+rev = "05234ed"
+hash = "75fd60b2df7115e0a6ca31a6a804d320"
+
+[[plugin.deps]]
+use = "dedukun/relative-motions"
+rev = "a603d9e"
+hash = "e02a788e5b8ae0fb47fd0193dda589cc"
+
+[[plugin.deps]]
+use = "Ape/open-with-cmd"
+rev = "433cf30"
+hash = "86e0312b01bc5762813c6c1d0517f073"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:toggle-pane"
+rev = "05234ed"
+hash = "8a7c58225816a163a6e8730c0adafbc8"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "05234ed"
+hash = "3996fc74044bc44144b323686f887e1"
+
+[[plugin.deps]]
+use = "azurehound/glow"
+rev = "b34901c"
+hash = "89a044a5aa7b7dfc45d05883840df8b4"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "9276ffa"
+hash = "8d7799e4598ff079fa5ee5c770d9bc08"
