@@ -40,7 +40,8 @@ packages="ags-hyprpanel-git apple_cursor base bat blueman brave-bin brightnessct
   python-pynvim qt6ct ripgrep rofi seahorse shotwell stow teams-for-linux-bin thunar thunar-volman timidity++ timeshift 
   timeshift-autosnap tmux ttf-cascadia-code ttf-fira-sans ttf-jetbrains-mono-nerd ttf-joypixels ttf-meslo-nerd 
   ttf-nerd-fonts-symbols-mono ttf-roboto ttf-terminus-nerd unrar unzip waybar wezterm wget wlogout wl-clipboard wofi xclip 
-  xdg-user-dirs xfce4-notifyd xfce-polkit xorg-font-util xorg-fonts-misc xorg-mkfontscale xorg-xhost yazi zip zoxide zsh"
+  xdg-user-dirs xfce4-notifyd xfce-polkit xorg-font-util xorg-fonts-misc xorg-mkfontscale xorg-xhost yazi zen-browser-bin zip 
+  zoxide zsh"
 
 yay -Sy $packages --needed --noconfirm
 
