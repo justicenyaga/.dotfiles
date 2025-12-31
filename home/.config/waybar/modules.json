@@ -30,22 +30,23 @@
     "on-click": "activate",
     "all-outputs": true,
     "format-icons": {
-      "1": "<span size='16000'>󰲠</span>",
-      "2": "<span size='16000'>󰲢</span>",
-      "3": "<span size='16000'>󰲤</span>",
-      "4": "<span size='16000'>󰲦</span>",
-      "5": "<span size='16000'>󰲨</span>",
-      "6": "<span size='16000'>󰲪</span>",
-      "7": "<span size='16000'>󰲬</span>",
-      "8": "<span size='16000'>󰲮</span>",
-      "9": "<span size='16000'>󰲰</span>",
-      "10": "<span size='16000'>󰿬</span>"
+      "1": "<span size='10000'></span>",
+      "2": "<span size='10000'></span>",
+      "3": "<span size='10000'></span>",
+      "4": "<span size='10000'></span>",
+      "5": "<span size='10000'></span>",
+      "6": "<span size='10000'></span>",
+      "7": "<span size='10000'></span>",
+      "8": "<span size='10000'></span>",
+      "9": "<span size='10000'></span>",
+      "10": "<span size='l0000'></span>",
+      "active": "<span size='10000'></span>"
     },
     "sort-by-number": true
   },
   "clock": {
     "interval": 1,
-    "format": "<span size='14000' color='#7aa2f7'></span>  {:%a %d %b %H:%M:%S}",
+    "format": "<span size='14000' color='#7aa2f7'>󰸗</span>  {:%a %d %b %H:%M:%S}",
     "tooltip-format": "<tt><big>{calendar}</big></tt>",
     "calendar": {
       "mode": "month",
@@ -88,8 +89,16 @@
   },
   "backlight": {
     "device": "intel_backlight",
-    "format": "<span size='18000'> {icon} </span>",
-    "format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"],
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "<span color='#ffd700' size='12000'>󰃚</span>",
+      "<span color='#ffd700' size='12000'>󰃛</span>",
+      "<span color='#ffd700' size='12000'>󰃜</span>",
+      "<span color='#ffd700' size='12000'>󰃝</span>",
+      "<span color='#ffd700' size='12000'>󰃞</span>",
+      "<span color='#ffd700' size='12000'>󰃟</span>",
+      "<span color='#ffd700' size='12000'>󰃠</span>"
+    ],
     "scroll-step": 5,
     "tooltip-format": "Brightness: {percent}%"
   },

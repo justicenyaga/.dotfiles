@@ -18,7 +18,11 @@
   ],
   "modules-right": [
     "network",
-    "group/group3"
+    "backlight",
+    "pulseaudio",
+    "group/power",
+    "tray"
+    // "group/group3"
     // "custom/power-menu"
   ],
 }
