@@ -32,10 +32,10 @@ sleep 1
 
 
 packages="ags-hyprpanel-git apple_cursor base bat blueman brave-bin brightnessctl btop chili-sddm-theme clang cliphist cmake 
-  conceal-bin dragon-drop emote eza falkon fd feh ffmpegthumbnailer file-roller fzf git-credential-manager-bin git-delta glow 
-  gnome-keyring gnome-system-monitor google-chrome grim gvfs gvfs-mtp htop hyprland hyprlock hyprpaper hyprshot-git i3-wm 
-  imagemagick jq keyd kitty kvantum lazygit libxml2-legacy man-db mediainfo mercurial mpd mpc mpv neofetch neovim 
-  net-tools noto-fonts noto-fonts-emoji ntfs-3g nvm nwg-look nvim-treesitter-parsers-git obsidian outlook-for-linux-bin
+  conceal-bin dragon-drop emote eza falkon fd feh ffmpegthumbnailer file-roller fzf galendae-git git-credential-manager-bin 
+  git-delta glow gnome-keyring gnome-system-monitor google-chrome grim gvfs gvfs-mtp htop hyprland hyprlock hyprpaper 
+  hyprshot-git i3-wm imagemagick jq keyd kitty kvantum lazygit libxml2-legacy man-db mediainfo mercurial mpd mpc mpv neofetch
+  neovim net-tools noto-fonts noto-fonts-emoji ntfs-3g nvm nwg-look nvim-treesitter-parsers-git obsidian outlook-for-linux-bin
   p7zip pass perl-image-exiftool picom polybar poppler postman power-profiles-daemon pyenv python-pipenv python-pipx 
   python-pynvim qt6ct ripgrep rofi seahorse shotwell stow teams-for-linux-bin thunar thunar-volman timidity++ timeshift 
   timeshift-autosnap tmux ttf-cascadia-code ttf-fira-sans ttf-jetbrains-mono-nerd ttf-joypixels ttf-meslo-nerd 
