@@ -32,6 +32,7 @@ alias oo="cd $HOME/obsidian"
 alias or="nvim -p $HOME/obsidian/inbox/*.md"
 [[ "$TERM" = "xterm-kitty" ]] && [[ -z $TMUX ]] && alias ssh="kitty +kitten ssh"
 alias yt720='yt-dlp -f "bestvideo[height=720]+bestaudio"'
+alias myemulator='emulator -avd Pixel_7_API_35 -no-boot-anim -gpu swiftshader_indirect'
 
 # add chrome alias if in a WSL environment
 if which powershell.exe &>/dev/null; then
