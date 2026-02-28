@@ -1,0 +1,327 @@
+#!/usr/bin/env python3
+"""
+Audio Device Switcher Popup for Waybar
+Usage: python3 audio-switcher.py [input|output|both]
+Requires: python-gobject, gtk3
+"""
+
+import gi
+import subprocess
+import sys
+
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk, Gdk, GLib
+
+CSS = b"""
+* {
+    font-family: 'Cascadia Mono', 'Cascadia Code', monospace;
+}
+
+window {
+    background: transparent;
+}
+
+.popup-box {
+    background-color: #1a1b2e;
+    border: 1px solid #7dcfff;
+    border-radius: 12px;
+    padding: 0px;
+    min-width: 380px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+}
+
+.section-header {
+    color: #7dcfff;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 12px 16px 6px 16px;
+}
+
+.device-row {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin: 2px 8px;
+    color: #c0c0d0;
+    font-size: 12px;
+    transition: all 200ms ease;
+}
+
+.device-row:hover {
+    background-color: rgba(125, 207, 255, 0.15);
+    color: #ffffff;
+}
+
+.device-row.active {
+    background-color: rgba(125, 207, 255, 0.2);
+    color: #7dcfff;
+    font-weight: bold;
+}
+
+.device-icon {
+    color: #7dcfff;
+    margin-right: 8px;
+    font-size: 13px;
+}
+
+.device-icon.inactive {
+    color: #555570;
+}
+
+.divider {
+    background-color: rgba(125, 207, 255, 0.2);
+    margin: 4px 12px;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: #555570;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.close-btn:hover {
+    color: #7dcfff;
+    background: rgba(125, 207, 255, 0.1);
+}
+
+.title-bar {
+    padding: 10px 14px 4px 16px;
+}
+
+.popup-title {
+    color: #7dcfff;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+"""
+
+
+def run(cmd):
+    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    return result.stdout.strip()
+
+
+def get_sinks():
+    raw = run("pactl list sinks")
+    devices = []
+    name = desc = ""
+    for line in raw.splitlines():
+        line = line.strip()
+        if line.startswith("Name:"):
+            name = line.split(None, 1)[1]
+        elif line.startswith("Description:"):
+            desc = line.split(None, 1)[1]
+        if name and desc:
+            devices.append((desc, name))
+            name = desc = ""
+    return devices
+
+
+def get_sources():
+    raw = run("pactl list sources")
+    devices = []
+    name = desc = ""
+    for line in raw.splitlines():
+        line = line.strip()
+        if line.startswith("Name:"):
+            name = line.split(None, 1)[1]
+        elif line.startswith("Description:"):
+            desc = line.split(None, 1)[1]
+        if name and desc:
+            if "Monitor" not in desc:
+                devices.append((desc, name))
+            name = desc = ""
+    return devices
+
+
+def get_default_sink():
+    return run("pactl get-default-sink")
+
+
+def get_default_source():
+    return run("pactl get-default-source")
+
+
+def set_sink(name):
+    subprocess.run(f"pactl set-default-sink {name}", shell=True)
+
+
+def set_source(name):
+    subprocess.run(f"pactl set-default-source {name}", shell=True)
+
+
+class AudioPopup(Gtk.Window):
+    def __init__(self, mode="both"):
+        super().__init__(type=Gtk.WindowType.TOPLEVEL)
+        self.mode = mode
+        self.set_title("Audio Switcher")
+        self.set_decorated(False)
+        self.set_resizable(False)
+        self.set_keep_above(True)
+        self.set_skip_taskbar_hint(True)
+        self.set_skip_pager_hint(True)
+        self.set_app_paintable(True)
+        self.set_type_hint(Gdk.WindowTypeHint.POPUP_MENU)
+
+        # transparency
+        screen = self.get_screen()
+        visual = screen.get_rgba_visual()
+        if visual:
+            self.set_visual(visual)
+
+        # CSS
+        provider = Gtk.CssProvider()
+        provider.load_from_data(CSS)
+        Gtk.StyleContext.add_provider_for_screen(
+            screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
+
+        self.connect("key-press-event", self.on_key)
+        self.connect("button-press-event", self.on_button_press)
+
+        self.build_ui()
+        self.show_all()
+
+        # pypr handles positioning via scratchpad config
+        # just grab input to detect outside clicks
+        GLib.timeout_add(200, self._grab_input)
+
+    def _grab_input(self):
+        gdk_win = self.get_window()
+        if not gdk_win:
+            return False
+        seat = Gdk.Display.get_default().get_default_seat()
+        seat.grab(
+            gdk_win,
+            Gdk.SeatCapabilities.ALL,
+            True,  # owner_events: deliver events inside window normally
+            None, None, None, None
+        )
+        return False
+
+    def on_button_press(self, w, event):
+        # Close if click lands outside our window bounds
+        win_x, win_y = self.get_position()
+        win_w, win_h = self.get_size()
+        if (event.x_root < win_x or event.x_root > win_x + win_w or
+                event.y_root < win_y or event.y_root > win_y + win_h):
+            Gtk.main_quit()
+
+    def on_key(self, w, event):
+        if event.keyval == Gdk.KEY_Escape:
+            Gtk.main_quit()
+
+    def build_ui(self):
+        outer = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        outer.get_style_context().add_class("popup-box")
+
+        # Title bar
+        title_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        title_bar.get_style_context().add_class("title-bar")
+
+        title = Gtk.Label(label="AUDIO DEVICES")
+        title.get_style_context().add_class("popup-title")
+        title.set_halign(Gtk.Align.START)
+
+        close_btn = Gtk.Button(label="✕")
+        close_btn.get_style_context().add_class("close-btn")
+        close_btn.connect("clicked", lambda b: Gtk.main_quit())
+
+        title_bar.pack_start(title, True, True, 0)
+        title_bar.pack_end(close_btn, False, False, 0)
+        outer.pack_start(title_bar, False, False, 0)
+
+        if self.mode in ("output", "both"):
+            self.build_section(outer, "OUTPUT DEVICES", get_sinks(), get_default_sink(), is_output=True)
+
+        if self.mode in ("input", "both"):
+            if self.mode == "both":
+                sep = Gtk.Separator()
+                sep.get_style_context().add_class("divider")
+                outer.pack_start(sep, False, False, 4)
+            self.build_section(outer, "INPUT DEVICES", get_sources(), get_default_source(), is_output=False)
+
+        # bottom padding
+        outer.pack_start(Gtk.Box(), False, False, 4)
+
+        frame = Gtk.Box()
+        frame.pack_start(outer, True, True, 0)
+        self.add(frame)
+
+    def build_section(self, parent, label, devices, current, is_output):
+        hdr = Gtk.Label(label=label)
+        hdr.get_style_context().add_class("section-header")
+        hdr.set_halign(Gtk.Align.START)
+        parent.pack_start(hdr, False, False, 0)
+
+        for desc, name in devices:
+            is_active = name == current
+            icon = "🔊" if is_output else "🎤"
+            dim_icon = "🔈" if is_output else "🎙️"
+
+            row = Gtk.Button()
+            row.set_relief(Gtk.ReliefStyle.NONE)
+            row.get_style_context().add_class("device-row")
+            if is_active:
+                row.get_style_context().add_class("active")
+
+            hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+
+            icon_lbl = Gtk.Label(label=icon if is_active else dim_icon)
+            icon_lbl.get_style_context().add_class("device-icon")
+            if not is_active:
+                icon_lbl.get_style_context().add_class("inactive")
+
+            name_lbl = Gtk.Label(label=desc)
+            name_lbl.set_halign(Gtk.Align.START)
+
+            hbox.pack_start(icon_lbl, False, False, 0)
+            hbox.pack_start(name_lbl, True, True, 0)
+
+            if is_active:
+                check = Gtk.Label(label="✓")
+                check.get_style_context().add_class("device-icon")
+                hbox.pack_end(check, False, False, 0)
+
+            row.add(hbox)
+
+            if is_output:
+                row.connect("clicked", self.on_sink_click, name)
+            else:
+                row.connect("clicked", self.on_source_click, name)
+
+            parent.pack_start(row, False, False, 0)
+
+    def on_sink_click(self, btn, name):
+        set_sink(name)
+        self.refresh()
+
+    def on_source_click(self, btn, name):
+        set_source(name)
+        self.refresh()
+
+    def refresh(self):
+        for child in self.get_children():
+            self.remove(child)
+        self.build_ui()
+        self.show_all()
+
+
+def main():
+    mode = sys.argv[1] if len(sys.argv) > 1 else "both"
+    if mode not in ("input", "output", "both"):
+        mode = "both"
+
+    win = AudioPopup(mode)
+    win.connect("destroy", Gtk.main_quit)
+    Gtk.main()
+
+
+if __name__ == "__main__":
+    main()

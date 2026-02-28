@@ -93,6 +93,7 @@
     "format-source-muted": "<span size='14000'>󰍭 Muted</span>",
     "format": "{format_source}",
     "on-click": "pamixer --default-source -t",
+    "on-click-right": "~/.local/bin/audio-switcher both",
     "on-scroll-up": "pamixer --default-source -i 5",
     "on-scroll-down": "pamixer --default-source -d 5",
     "scroll-step": 5
@@ -101,7 +102,7 @@
     "max-volume": 150,
     "scroll-step": 5,
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "on-click-right": "pavucontrol",
+    "on-click-right": "~/.local/bin/audio-switcher both",
     "format": "{icon}  {volume}%",
     "format-bluetooth": "<span size='14000' color='#1e90ff'></span> {volume}%",
     "format-bluetooth-muted": "  Muted",
