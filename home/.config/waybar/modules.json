@@ -88,15 +88,24 @@
     "scroll-step": 5,
     "tooltip-format": "Brightness: {percent}%"
   },
-  "pulseaudio": {
+  "pulseaudio#input": {
+    "format-source": "<span size='12000' color='#00ff00'></span><span> {volume}%</span>",
+    "format-source-muted": "<span size='14000'>󰍭 Muted</span>",
+    "format": "{format_source}",
+    "on-click": "pamixer --default-source -t",
+    "on-scroll-up": "pamixer --default-source -i 5",
+    "on-scroll-down": "pamixer --default-source -d 5",
+    "scroll-step": 5
+  },
+  "pulseaudio#output": {
     "max-volume": 150,
     "scroll-step": 5,
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-right": "pavucontrol",
     "format": "{icon}  {volume}%",
     "format-bluetooth": "<span size='14000' color='#1e90ff'></span> {volume}%",
-    "format-bluetooth-muted": " Muted",
-    "format-muted": " Muted",
+    "format-bluetooth-muted": "  Muted",
+    "format-muted": "  Muted",
     "format-icons": {
       "hands-free": "󰋎",
       "headphone": "<span color='#f4be49'></span>",

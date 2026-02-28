@@ -99,7 +99,11 @@ window#waybar {
   margin-right: 15px;
 }
 
-#pulseaudio.muted {
+#pulseaudio.input.source-muted {
+  color: @blue-gray;
+}
+
+#pulseaudio.output.muted {
   color: @blue-gray;
 }
 
