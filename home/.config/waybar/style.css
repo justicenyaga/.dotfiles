@@ -4,7 +4,7 @@
   font-family:
     "Cascadia Mono", "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial,
     sans-serif;
-  font-size: 15px;
+  font-size: 12.5px;
 }
 
 window#waybar {
@@ -39,7 +39,7 @@ window#waybar {
 
 #workspaces button {
   color: @cyan;
-  padding: 0px 4px;
+  padding: 0px 1px;
 }
 
 #workspaces button:hover {

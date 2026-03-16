@@ -26,27 +26,27 @@
     "smooth-scrolling-threshold": 1
   },
   "hyprland/workspaces": {
-    "format": "<span size='14000'>{icon}</span>",
+    "format": "<span size='8000'>{icon}</span>",
     "on-click": "activate",
     "all-outputs": true,
     "format-icons": {
-      "1": "<span size='10000'></span>",
-      "2": "<span size='10000'></span>",
-      "3": "<span size='10000'></span>",
-      "4": "<span size='10000'></span>",
-      "5": "<span size='10000'></span>",
-      "6": "<span size='10000'></span>",
-      "7": "<span size='10000'></span>",
-      "8": "<span size='10000'></span>",
-      "9": "<span size='10000'></span>",
-      "10": "<span size='l0000'></span>",
-      "active": "<span size='18000'></span>"
+      "1": "<span size='8000'></span>",
+      "2": "<span size='8000'></span>",
+      "3": "<span size='8000'></span>",
+      "4": "<span size='8000'></span>",
+      "5": "<span size='8000'></span>",
+      "6": "<span size='8000'></span>",
+      "7": "<span size='8000'></span>",
+      "8": "<span size='8000'></span>",
+      "9": "<span size='8000'></span>",
+      "10": "<span size='8000'></span>",
+      "active": "<span size='14000'></span>"
     },
     "sort-by-number": true
   },
   "clock": {
     "interval": 1,
-    "format": "<span size='14000' color='#7aa2f7'>󰸗</span>  {:%a %d %b %H:%M:%S}",
+    "format": "<span size='10000' color='#7aa2f7'>󰸗</span>  {:%a %d %b %H:%M:%S}",
     "tooltip": false,
     "on-click": "pkill galendae || galendae"
   },
@@ -68,8 +68,8 @@
   },
   "network": {
     "interval": 1,
-    "format-wifi": "<span size='14000' color='#ffa500'></span>  {bandwidthDownBytes}",
-    "format-ethernet": "<span size='14000' color='#ffa500'></span>  {bandwidthDownBytes}",
+    "format-wifi": "<span size='10000' color='#ffa500'></span>  {bandwidthDownBytes}",
+    "format-ethernet": "<span size='10000' color='#ffa500'></span>  {bandwidthDownBytes}",
     "tooltip": false,
     "format-disconnected": ""
   },
@@ -77,20 +77,20 @@
     "device": "intel_backlight",
     "format": "{icon} {percent}%",
     "format-icons": [
-      "<span color='#ffd700' size='12000'>󰃚</span>",
-      "<span color='#ffd700' size='12000'>󰃛</span>",
-      "<span color='#ffd700' size='12000'>󰃜</span>",
-      "<span color='#ffd700' size='12000'>󰃝</span>",
-      "<span color='#ffd700' size='12000'>󰃞</span>",
-      "<span color='#ffd700' size='12000'>󰃟</span>",
-      "<span color='#ffd700' size='12000'>󰃠</span>"
+      "<span color='#ffd700' size='10000'>󰃚</span>",
+      "<span color='#ffd700' size='10000'>󰃛</span>",
+      "<span color='#ffd700' size='10000'>󰃜</span>",
+      "<span color='#ffd700' size='10000'>󰃝</span>",
+      "<span color='#ffd700' size='10000'>󰃞</span>",
+      "<span color='#ffd700' size='10000'>󰃟</span>",
+      "<span color='#ffd700' size='10000'>󰃠</span>"
     ],
     "scroll-step": 5,
     "tooltip-format": "Brightness: {percent}%"
   },
   "pulseaudio#input": {
-    "format-source": "<span size='12000' color='#00ff00'></span><span> {volume}%</span>",
-    "format-source-muted": "<span size='14000'>󰍭 Muted</span>",
+    "format-source": "<span size='10000' color='#00ff00'></span><span> {volume}%</span>",
+    "format-source-muted": "<span size='10000'>󰍭 Muted</span>",
     "format": "{format_source}",
     "on-click": "pamixer --default-source -t",
     "on-click-right": "~/.local/bin/audio-switcher both",
@@ -104,7 +104,7 @@
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-right": "~/.local/bin/audio-switcher both",
     "format": "{icon}  {volume}%",
-    "format-bluetooth": "<span size='14000' color='#1e90ff'></span> {volume}%",
+    "format-bluetooth": "<span size='10000' color='#1e90ff'></span> {volume}%",
     "format-bluetooth-muted": "  Muted",
     "format-muted": "  Muted",
     "format-icons": {
@@ -115,15 +115,15 @@
       "portable": "",
       "car": "",
       "default": [
-        "<span color='#00ff7f'></span>",
-        "<span color='#00ff00'></span>",
-        "<span color='#7fff00'></span>",
-        "<span color='#b2ff66'></span>",
-        "<span color='#ffff66'></span>",
-        "<span color='#ffc300'></span>",
-        "<span color='#ff8c00'></span>",
-        "<span color='#ff5733'></span>",
-        "<span color='#ff0000'></span>"
+        "<span color='#00ff7f' size='10000'></span>",
+        "<span color='#00ff00' size='10000'></span>",
+        "<span color='#7fff00' size='10000'></span>",
+        "<span color='#b2ff66' size='10000'></span>",
+        "<span color='#ffff66' size='10000'></span>",
+        "<span color='#ffc300' size='10000'></span>",
+        "<span color='#ff8c00' size='10000'></span>",
+        "<span color='#ff5733' size='10000'></span>",
+        "<span color='#ff0000' size='10000'></span>"
       ]
     }
   },
@@ -139,14 +139,14 @@
       "good": 98,
       "excelent": 100
     },
-    "format": "<span size='14000'>{icon}</span> {capacity}%",
-    "format-full": "<span size='14000' color='#00ff7f'>󰁹</span> {capacity}%",
-    "format-charging-critical": "<span size='14000'>󰢟</span> {capacity}%",
-    "format-charging-warning": "<span size='14000'>󰂆</span> {capacity}%",
-    "format-charging-minor": "<span size='14000'>󰂇</span> {capacity}%",
-    "format-charging-moderate": "<span size='14000'>󰢝</span> {capacity}%",
-    "format-charging-high": "<span size='14000'>󰢞</span> {capacity}%",
-    "format-charging-good": "<span size='14000'>󰂋</span> {capacity}%",
+    "format": "<span size='10000'>{icon}</span> {capacity}%",
+    "format-full": "<span size='10000' color='#00ff7f'>󰁹</span> {capacity}%",
+    "format-charging-critical": "<span size='10000'>󰢟</span> {capacity}%",
+    "format-charging-warning": "<span size='10000'>󰂆</span> {capacity}%",
+    "format-charging-minor": "<span size='10000'>󰂇</span> {capacity}%",
+    "format-charging-moderate": "<span size='10000'>󰢝</span> {capacity}%",
+    "format-charging-high": "<span size='10000'>󰢞</span> {capacity}%",
+    "format-charging-good": "<span size='10000'>󰂋</span> {capacity}%",
     "format-icons": {
       "critical": "󰂃",
       "warning": "<span color='#ff5733'>󰁺</span>",
@@ -158,18 +158,18 @@
     }
   },
   "power-profiles-daemon": {
-    "format": "<span size='14000' color='#6c77bb'>{icon}</span>",
+    "format": "<span size='10000' color='#6c77bb'>{icon}</span>",
     // TODO: Remove driver from the tooltip
     "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
     "format-icons": {
       "default": " ",
       "performance": " ",
       "balanced": " ",
-      "power-saver": "<span size='18000'>󱈑</span>"
+      "power-saver": "<span size='13000'>󱈑</span>"
     }
   },
   "tray": {
-    "icon-size": 21,
+    "icon-size": 15,
     "spacing": 5,
     "reverse-direction": true
   },
