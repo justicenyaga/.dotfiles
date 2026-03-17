@@ -135,3 +135,19 @@ window#waybar {
   margin-right: 20px;
   margin-left: 10px;
 }
+
+#custom-notifications {
+  background-color: @bg2;
+  border-radius: 25px;
+  padding: 0px 12px;
+  margin: 0px 4px;
+  color: #6b7280;
+}
+
+#custom-notifications.unread {
+  color: #7c9eff;
+}
+
+/* #custom-notifications.empty { */
+/*   color: #6b7280; */
+/* } */

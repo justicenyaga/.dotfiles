@@ -1,0 +1,524 @@
+#!/usr/bin/env python3
+"""
+Notification Center Popup for Waybar — GTK4
+Usage: python3 notif-center.py
+Requires: python-gobject, gtk4
+"""
+
+import os
+import re
+import sqlite3
+from datetime import datetime
+
+import gi
+
+gi.require_version("Gtk", "4.0")
+gi.require_version("Gdk", "4.0")
+from gi.repository import Gdk, GLib, Gtk, Pango
+
+DB_PATH = os.path.expanduser("~/.cache/xfce4/notifyd/log.sqlite")
+
+CSS = b"""
+* {
+    font-family: 'Cascadia Mono', 'Cascadia Code', monospace;
+}
+
+.popup-box {
+    background-color: #1a1b2e;
+    border: 1px solid #7dcfff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+}
+
+.title-bar {
+    padding: 10px 14px 4px 16px;
+}
+
+.popup-title {
+    color: #7dcfff;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: #555570;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+.close-btn:hover {
+    color: #7dcfff;
+    background: rgba(125, 207, 255, 0.1);
+}
+
+.actions-bar {
+    padding: 4px 10px 8px 10px;
+}
+
+.action-btn {
+    background: rgba(125, 207, 255, 0.07);
+    border: 1px solid rgba(125, 207, 255, 0.2);
+    border-radius: 6px;
+    color: #7dcfff;
+    font-size: 10px;
+    font-family: 'Cascadia Mono', monospace;
+    padding: 3px 10px;
+    letter-spacing: 0.5px;
+}
+.action-btn:hover {
+    background: rgba(125, 207, 255, 0.18);
+    color: #ffffff;
+}
+.action-btn.danger {
+    color: #ff7aa2;
+    border: 1px solid rgba(255, 122, 162, 0.2);
+    background: rgba(255, 122, 162, 0.05);
+}
+.action-btn.danger:hover {
+    background: rgba(255, 122, 162, 0.18);
+    color: #ffffff;
+}
+
+.divider {
+    background-color: rgba(125, 207, 255, 0.15);
+    margin: 0px 12px;
+    min-height: 1px;
+}
+
+.notif-list {
+    background: transparent;
+    padding: 4px 8px 8px 8px;
+}
+
+.notif-row {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(125, 207, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin: 3px 0px;
+}
+.notif-row.unread {
+    background: rgba(125, 207, 255, 0.07);
+    border: 1px solid rgba(125, 207, 255, 0.25);
+}
+.notif-row.read {
+    opacity: 0.45;
+}
+
+.notif-app {
+    color: #f7c948;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.notif-summary {
+    color: #e2e6f0;
+    font-size: 12px;
+    font-weight: bold;
+}
+.notif-body {
+    color: #8b9ab5;
+    font-size: 11px;
+}
+.notif-time {
+    color: #555570;
+    font-size: 10px;
+}
+.unread-dot {
+    color: #7dcfff;
+    font-size: 9px;
+}
+
+.row-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: #555570;
+    font-size: 11px;
+    padding: 2px 6px;
+    min-width: 0;
+}
+.row-btn:hover {
+    background: rgba(125, 207, 255, 0.12);
+    color: #7dcfff;
+}
+.row-btn.del:hover {
+    background: rgba(255, 122, 162, 0.12);
+    color: #ff7aa2;
+}
+
+.empty-label {
+    color: #555570;
+    font-size: 12px;
+    padding: 30px 20px;
+}
+
+.date-header {
+    color: #555570;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 6px 4px 2px 4px;
+}
+"""
+
+APP_ICONS = {
+    "hyprshot": "󰹑",
+    "evolution": "󰃭",
+    "alarm": "󰃭",
+    "firefox": "󰈹",
+    "zen": "󰈹",
+    "default": "󰂚",
+}
+
+
+def get_icon(app_id, app_name):
+    key = ((app_id or "") + (app_name or "")).lower()
+    for k, v in APP_ICONS.items():
+        if k in key:
+            return v
+    return APP_ICONS["default"]
+
+
+def _ts_to_dt(ts):
+    """xfce4-notifyd stores timestamps in microseconds (16 digits).
+    Guard against ms (13) and s (10) just in case."""
+    if ts > 1_000_000_000_000_000:  # microseconds
+        return datetime.fromtimestamp(ts / 1_000_000)
+    if ts > 1_000_000_000_000:  # milliseconds
+        return datetime.fromtimestamp(ts / 1_000)
+    return datetime.fromtimestamp(ts)  # seconds
+
+
+def format_time(ts):
+    try:
+        dt = _ts_to_dt(ts)
+        diff = (datetime.now() - dt).total_seconds()
+        if diff < 60:
+            return "just now"
+        if diff < 3600:
+            return f"{int(diff // 60)}m ago"
+        if diff < 86400:
+            return f"{int(diff // 3600)}h ago"
+        return dt.strftime("%b %d")
+    except Exception:
+        return ""
+
+
+def date_group(ts):
+    try:
+        dt = _ts_to_dt(ts)
+        diff = (datetime.now().date() - dt.date()).days
+        if diff == 0:
+            return "TODAY"
+        if diff == 1:
+            return "YESTERDAY"
+        return dt.strftime("%A, %b %d").upper()
+    except Exception:
+        return "OLDER"
+
+
+def strip_tags(text):
+    return re.sub(r"<[^>]+>", "", text or "").strip()
+
+
+# ── DB helpers ─────────────────────────────────────────────────────────────────
+
+
+def db_connect():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+def fetch_notifications():
+    conn = db_connect()
+    rows = conn.execute(
+        "SELECT id, timestamp, app_id, app_name, summary, body, is_read "
+        "FROM notifications ORDER BY timestamp DESC LIMIT 100"
+    ).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
+
+
+def db_mark_read(nid):
+    conn = db_connect()
+    conn.execute("UPDATE notifications SET is_read=1 WHERE id=?", (nid,))
+    conn.commit()
+    conn.close()
+
+
+def db_delete(nid):
+    conn = db_connect()
+    conn.execute("DELETE FROM notifications WHERE id=?", (nid,))
+    conn.commit()
+    conn.close()
+
+
+def db_mark_all_read():
+    conn = db_connect()
+    conn.execute("UPDATE notifications SET is_read=1")
+    conn.commit()
+    conn.close()
+
+
+def db_clear_all():
+    conn = db_connect()
+    conn.execute("DELETE FROM notifications")
+    conn.commit()
+    conn.close()
+
+
+# ── UI ─────────────────────────────────────────────────────────────────────────
+
+
+class NotifWindow(Gtk.ApplicationWindow):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.set_title("notif-center")
+        self.set_decorated(False)
+        self.set_resizable(False)
+        self.set_default_size(420, -1)
+
+        provider = Gtk.CssProvider()
+        provider.load_from_data(CSS)
+        Gtk.StyleContext.add_provider_for_display(
+            Gdk.Display.get_default(),
+            provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+        )
+
+        key_ctrl = Gtk.EventControllerKey()
+        key_ctrl.connect("key-pressed", self.on_key)
+        self.add_controller(key_ctrl)
+
+        self.notifications = fetch_notifications()
+        self._build_chrome()
+        self._refresh_list()
+
+    def on_key(self, ctrl, keyval, keycode, state):
+        if keyval == Gdk.KEY_Escape:
+            self.get_application().quit()
+        return False
+
+    def _build_chrome(self):
+        """Build the static parts of the UI once — title, actions, scroll container."""
+        outer = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        outer.get_style_context().add_class("popup-box")
+
+        # Title bar
+        title_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        title_bar.get_style_context().add_class("title-bar")
+        title_bar.set_margin_bottom(4)
+
+        self.title_lbl = Gtk.Label()
+        self.title_lbl.get_style_context().add_class("popup-title")
+        self.title_lbl.set_halign(Gtk.Align.START)
+        self.title_lbl.set_hexpand(True)
+
+        close_btn = Gtk.Button(label="✕")
+        close_btn.get_style_context().add_class("close-btn")
+        close_btn.connect("clicked", lambda b: self.get_application().quit())
+
+        title_bar.append(self.title_lbl)
+        title_bar.append(close_btn)
+        outer.append(title_bar)
+        outer.append(self._divider())
+
+        # Bulk actions
+        actions_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        actions_bar.get_style_context().add_class("actions-bar")
+
+        mark_all = Gtk.Button(label="✓  MARK ALL READ")
+        mark_all.get_style_context().add_class("action-btn")
+        mark_all.connect("clicked", self.on_mark_all)
+
+        clear_all = Gtk.Button(label="✕  CLEAR ALL")
+        clear_all.get_style_context().add_class("action-btn")
+        clear_all.get_style_context().add_class("danger")
+        clear_all.set_halign(Gtk.Align.END)
+        clear_all.set_hexpand(True)
+        clear_all.connect("clicked", self.on_clear_all)
+
+        actions_bar.append(mark_all)
+        actions_bar.append(clear_all)
+        outer.append(actions_bar)
+        outer.append(self._divider())
+
+        # Scroll container — holds the dynamic list_box
+        self.scroll = Gtk.ScrolledWindow()
+        self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        self.scroll.set_min_content_height(480)
+        self.scroll.set_max_content_height(520)
+
+        self.list_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.list_box.get_style_context().add_class("notif-list")
+        self.scroll.set_child(self.list_box)
+
+        outer.append(self.scroll)
+        self.set_child(outer)
+
+    def _build(self):
+        """Legacy alias kept so _do() still works."""
+        self._refresh_list()
+
+    def _refresh_list(self):
+        """Only repopulate the list area — no widget tree teardown."""
+        # Update title
+        unread = sum(1 for n in self.notifications if not n["is_read"])
+        self.title_lbl.set_label(
+            f"NOTIFICATIONS  [{unread} unread]"
+            if unread
+            else "NOTIFICATIONS  [all read]"
+        )
+
+        # Clear list children
+        while True:
+            child = self.list_box.get_first_child()
+            if child is None:
+                break
+            self.list_box.remove(child)
+
+        # Repopulate
+        if not self.notifications:
+            empty = Gtk.Label(label="󰂛   No notifications")
+            empty.get_style_context().add_class("empty-label")
+            empty.set_halign(Gtk.Align.CENTER)
+            self.list_box.append(empty)
+        else:
+            last_group = None
+            for notif in self.notifications:
+                group = date_group(notif["timestamp"])
+                if group != last_group:
+                    grp_lbl = Gtk.Label(label=group)
+                    grp_lbl.get_style_context().add_class("date-header")
+                    grp_lbl.set_halign(Gtk.Align.START)
+                    self.list_box.append(grp_lbl)
+                    last_group = group
+                self.list_box.append(self._build_row(notif))
+
+    def _divider(self):
+        sep = Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL)
+        sep.get_style_context().add_class("divider")
+        return sep
+
+    def _build_row(self, notif):
+        row = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+        row.get_style_context().add_class("notif-row")
+        row.get_style_context().add_class("unread" if not notif["is_read"] else "read")
+        row.set_margin_top(2)
+        row.set_margin_bottom(2)
+
+        # Top line
+        top = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+
+        top.append(
+            Gtk.Label(label=get_icon(notif.get("app_id"), notif.get("app_name")))
+        )
+
+        app_lbl = Gtk.Label(
+            label=(notif.get("app_name") or notif.get("app_id") or "unknown").upper()
+        )
+        app_lbl.get_style_context().add_class("notif-app")
+        app_lbl.set_halign(Gtk.Align.START)
+        app_lbl.set_hexpand(True)
+        top.append(app_lbl)
+
+        if not notif["is_read"]:
+            dot = Gtk.Label(label="●")
+            dot.get_style_context().add_class("unread-dot")
+            top.append(dot)
+
+        time_lbl = Gtk.Label(label=format_time(notif["timestamp"]))
+        time_lbl.get_style_context().add_class("notif-time")
+        top.append(time_lbl)
+
+        if not notif["is_read"]:
+            rb = Gtk.Button(label="✓")
+            rb.get_style_context().add_class("row-btn")
+            rb.set_tooltip_text("Mark as read")
+            rb.connect(
+                "clicked", lambda b, nid=notif["id"]: self._do(db_mark_read, nid)
+            )
+            top.append(rb)
+
+        db_btn = Gtk.Button(label="✕")
+        db_btn.get_style_context().add_class("row-btn")
+        db_btn.get_style_context().add_class("del")
+        db_btn.set_tooltip_text("Delete")
+        db_btn.connect("clicked", lambda b, nid=notif["id"]: self._do(db_delete, nid))
+        top.append(db_btn)
+
+        row.append(top)
+
+        # Summary
+        summary = (notif.get("summary") or "").strip()
+        if summary:
+            s = Gtk.Label(label=summary)
+            s.get_style_context().add_class("notif-summary")
+            s.set_halign(Gtk.Align.START)
+            s.set_wrap(True)
+            s.set_wrap_mode(Pango.WrapMode.WORD_CHAR)
+            s.set_max_width_chars(46)
+            row.append(s)
+
+        # Body
+        body = strip_tags(notif.get("body") or "")
+        if body:
+            b = Gtk.Label(label=body)
+            b.get_style_context().add_class("notif-body")
+            b.set_halign(Gtk.Align.START)
+            b.set_wrap(True)
+            b.set_wrap_mode(Pango.WrapMode.WORD_CHAR)
+            b.set_max_width_chars(46)
+            b.set_lines(2)
+            b.set_ellipsize(Pango.EllipsizeMode.END)
+            row.append(b)
+
+        return row
+
+    # ── Callbacks ──────────────────────────────────────────────────────────────
+
+    def _do(self, fn, *args):
+        fn(*args)
+        self.notifications = fetch_notifications()
+        self._build()
+
+    def on_mark_all(self, btn):
+        self._do(db_mark_all_read)
+
+    def on_clear_all(self, btn):
+        dialog = Gtk.AlertDialog()
+        dialog.set_message("Clear all notifications?")
+        dialog.set_detail("This cannot be undone.")
+        dialog.set_buttons(["Cancel", "Clear All"])
+        dialog.set_cancel_button(0)
+        dialog.set_default_button(0)
+        dialog.choose(self, None, self._on_clear_response)
+
+    def _on_clear_response(self, dialog, result):
+        try:
+            if dialog.choose_finish(result) == 1:
+                self._do(db_clear_all)
+        except Exception:
+            pass
+
+
+class NotifCenter(Gtk.Application):
+    def __init__(self):
+        super().__init__(application_id="com.waybar.notif-center")
+
+    def do_activate(self):
+        win = NotifWindow(application=self)
+        win.present()
+
+
+def main():
+    app = NotifCenter()
+    app.run(None)
+
+
+if __name__ == "__main__":
+    main()

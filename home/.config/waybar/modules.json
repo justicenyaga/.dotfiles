@@ -48,7 +48,7 @@
     "interval": 1,
     "format": "<span size='10000' color='#7aa2f7'>󰸗</span>  {:%a %d %b %H:%M:%S}",
     "tooltip": false,
-    "on-click": "pkill galendae || galendae"
+    "on-click": "pkill gnome-calendar || gnome-calendar"
   },
   "group/power": {
     "orientation": "horizontal",
@@ -177,5 +177,14 @@
     "format": "<span size='14000'>⏻</span>",
     "on-click": "wlogout",
     "tooltip-format": "Power Menu"
+  },
+  "custom/notifications": {
+    "exec": "~/.config/waybar/notif.sh count",
+    "interval": 5,
+    "return-type": "json",
+    "format": "<span color='#7c9eff'>{icon}</span> <span size='9500' color='white'>{text}</span>",
+    "format-icons": { "default": "<span size='10000'>󰂚</span>" },
+    "on-click": "~/.local/bin/notif-center",
+    "tooltip": false
   }
 }

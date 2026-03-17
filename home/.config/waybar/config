@@ -22,7 +22,8 @@
     "pulseaudio#input",
     "pulseaudio#output",
     "group/power",
-    "tray"
+    "tray",
+    "custom/notifications"
     // "group/group3"
     // "custom/power-menu"
   ],
