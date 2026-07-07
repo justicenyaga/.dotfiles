@@ -54,7 +54,7 @@ ShellRoot {
         id: window
 
         implicitWidth: 460
-        implicitHeight: 580
+        implicitHeight: 618
         color: "transparent"
 
         anchors {
@@ -81,8 +81,8 @@ ShellRoot {
             anchors {
                 top: parent.top
                 right: parent.right
-                topMargin: 20
-                rightMargin: 20
+                topMargin: 58
+                rightMargin: 10
             }
 
             transform: Translate {
@@ -117,7 +117,7 @@ ShellRoot {
 
                     Text {
                         anchors.centerIn: parent
-                        text: "My Notes"
+                        text: "Diz Notez"
                         font.pixelSize: 15
                         font.bold: true
                         color: "#4a9eff"
