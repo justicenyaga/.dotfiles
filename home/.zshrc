@@ -64,6 +64,9 @@ if [ -f "$HOME/.zshrc_secrets" ]; then
   source "$HOME/.zshrc_secrets"
 fi
 
+# tmux
+export POWERKIT_DEFAULT_STALE_MULTIPLIER=1
+
 # flatpak
 # export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:~/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
 
