@@ -1,0 +1,7 @@
+{
+  "awayOnSystemIdle": true,
+  "idleDetection": {
+    "forceState": true,
+    "stateFile": "/tmp/teams-for-linux-idle-state-$USER"
+  }
+}
