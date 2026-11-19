@@ -8,7 +8,7 @@ TOUCHPAD_DEVICE="ven_06cb:00-06cb:cfeb-touchpad"
 disable_touchpad() {
     echo "Disabling touchpad: $TOUCHPAD_DEVICE"
     
-    if hyprctl keyword device[$TOUCHPAD_DEVICE]:enabled false 2>/dev/null; then
+    if hyprctl eval "hl.device({ name = \"$TOUCHPAD_DEVICE\", enabled = false })" 2>/dev/null; then
         echo "Touchpad disabled"
         save_touchpad_status "disabled"
         # Send notification
@@ -25,7 +25,7 @@ disable_touchpad() {
 enable_touchpad() {
     echo "Enabling touchpad: $TOUCHPAD_DEVICE"
     
-    if hyprctl keyword device[$TOUCHPAD_DEVICE]:enabled true 2>/dev/null; then
+    if hyprctl eval "hl.device({ name = \"$TOUCHPAD_DEVICE\", enabled = true })" 2>/dev/null; then
         echo "Touchpad enabled"
         save_touchpad_status "enabled"
         # Send notification

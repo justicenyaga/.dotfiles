@@ -17,12 +17,12 @@ handle_event() {
 
   if [[ "$event" == "monitoradded>>HDMI-A-1" ]]; then
     echo "monitor added: $1" >> /tmp/monitor-debug.log
-    hyprctl --instance 0 keyword monitor "eDP-1, disable"
+    hyprctl --instance 0 eval 'hl.monitor({ output = "eDP-1", disabled = true })'
     restart_waybar "HDMI-A-1"
 
   elif [[ "$event" == "monitorremoved>>HDMI-A-1" ]]; then
     echo "monitor removed: $1" >> /tmp/monitor-debug.log
-    hyprctl --instance 0 keyword monitor "eDP-1, 1920x1200, 1920x0, 1"
+    hyprctl --instance 0 eval 'hl.monitor({ output = "eDP-1", mode = "1920x1200", position = "1920x0", scale = 1 })'
     restart_waybar "eDP-1"
   fi
 }
