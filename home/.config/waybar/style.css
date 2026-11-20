@@ -95,7 +95,8 @@ window#waybar {
   margin: 0px 4px;
 }
 
-#network {
+#network,
+#custom-net-speed {
   margin-right: 15px;
 }
 

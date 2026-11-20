@@ -17,7 +17,7 @@
     "clock"
   ],
   "modules-right": [
-    "network",
+    "custom/net-speed",
     "backlight",
     "pulseaudio#input",
     "pulseaudio#output",

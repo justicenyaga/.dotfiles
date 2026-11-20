@@ -73,6 +73,17 @@
     "tooltip": false,
     "format-disconnected": ""
   },
+  "custom/net-speed": {
+    "exec": "~/.config/waybar/net-speed.sh",
+    "interval": 1,
+    "return-type": "json",
+    "format": "{icon}  {text}",
+    "format-icons": {
+      "upload": "<span size='10000' color='#00ff7f'></span>",
+      "download": "<span size='10000' color='#ffa500'></span>"
+    },
+    "tooltip": false
+  },
   "backlight": {
     "device": "intel_backlight",
     "format": "{icon} {percent}%",
