@@ -171,7 +171,11 @@
   "tray": {
     "icon-size": 15,
     "spacing": 5,
-    "reverse-direction": true
+    "reverse-direction": false,
+    "orders": {
+      "nm-applet": 100,
+      "blueman": 90
+    }
   },
   "custom/power-menu": {
     "format": "<span size='14000'>⏻</span>",
