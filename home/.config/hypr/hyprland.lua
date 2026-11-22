@@ -2,8 +2,8 @@
 ---- MONITORS ----
 ------------------
 
-hl.monitor({ output = "HDMI-A-1", mode = "1920x1080", position = "0x0", scale = 1 })
-hl.monitor({ output = "eDP-1", mode = "1920x1200", position = "1920x0", scale = 1 })
+hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto", scale = 1 })
+hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 }) -- any other monitor
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -56,6 +56,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark'")
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
 	hl.exec_cmd("/usr/lib/evolution-data-server/evolution-alarm-notify")
+	hl.exec_cmd("~/.config/hypr/scripts/monitors.sh watch")
 	hl.exec_cmd("~/.config/hypr/scripts/monitor-switcher.sh")
 	hl.exec_cmd("sleep 3 && quickshell -p ~/.config/quickshell/sticky-notes")
 	hl.exec_cmd("~/.config/hypr/scripts/teams-away-watch.sh")

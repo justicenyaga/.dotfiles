@@ -35,12 +35,8 @@ exec(mainMod .. " + N", "~/.config/quickshell/sticky-notes/notes.sh")
 exec(mainMod .. " + B", "pkill -x overskride || overskride")
 
 -- Laptop display on / off
-bind(mainMod .. " + SHIFT + M", function()
-	hl.monitor({ output = "eDP-1", mode = "1920x1200", position = "1920x0", scale = 1 })
-end)
-bind(mainMod .. " + ALT + M", function()
-	hl.monitor({ output = "eDP-1", disabled = true })
-end)
+exec(mainMod .. " + SHIFT + M", "~/.config/hypr/scripts/monitors.sh toggle")
+exec(mainMod .. " + ALT + M", "~/.config/hypr/scripts/monitors.sh external")
 
 -- Media (mpc variants kept commented as in the old config)
 -- exec(mainMod .. " + SHIFT + space",  "mpc toggle")
