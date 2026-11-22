@@ -4,8 +4,8 @@ gui:
     selectedLineBgColor:
       - "#292e42"
 git:
-  pagers:
-    - pager: delta --dark --paging=never
+  diffRenderers:
+    - command: delta --dark --paging=never
   autoFetch: false
   branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --oneline
   allBranchesLogCmds:
