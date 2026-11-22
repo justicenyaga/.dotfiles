@@ -34,6 +34,156 @@ alias or="nvim -p $HOME/obsidian/inbox/*.md"
 alias yt720='yt-dlp -f "bestvideo[height=720]+bestaudio"'
 alias myemulator='emulator -avd Pixel_7_API_35 -no-boot-anim -gpu swiftshader_indirect'
 
+flutter-release() {
+  if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+    echo "Usage: flutter-release <version> <build_number> <service_name>"
+    return 1
+  fi
+  local version="$1"
+  local build_number="$2"
+  local service_name="$3"
+  fvm flutter build appbundle --release \
+    --build-name="$version" \
+    --build-number="$build_number" \
+    --obfuscate \
+    --split-debug-info=build/debug-info \
+  && dd-upload "$version" "$service_name"
+}
+
+sb-release() {
+  if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+    echo "Usage: sb-release <version> <build_number> <service_name> [env=production]"
+    return 1
+  fi
+
+  local version="$1"
+  local build_number="$2"
+  local service_name="$3"
+  local env="${4:-production}"
+  local flutter_version="${SHOREBIRD_FLUTTER_VERSION:-$(jq -r '.flutter // empty' .fvmrc 2>/dev/null)}"
+
+  if [ -z "$flutter_version" ]; then
+    echo "No Flutter version found. Set SHOREBIRD_FLUTTER_VERSION or add .fvmrc"
+    return 1
+  fi
+
+  shorebird release android \
+    --flutter-version="$flutter_version" \
+    --dart-define-from-file=".env/${env}.json" \
+    --build-name="$version" \
+    --build-number="$build_number" \
+    -- --obfuscate --split-debug-info=build/debug-info \
+  && dd-upload "$version" "$service_name"
+}
+
+dd-upload() {
+  if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Usage: dd-upload <version> <service_name>"
+    return 1
+  fi
+
+  local version="$1"
+  local service_name="$2"
+  local debug_info_dir="./build/debug-info"
+  local mapping_file="./build/app/outputs/mapping/release/mapping.txt"
+  local archive_root="$HOME/projects/customer_app_debug_info"
+  local dest_dir="$archive_root/${version}_${service_name}"
+
+  datadog-ci flutter-symbols upload \
+    --service-name "$service_name" \
+    --version "$version" \
+    --dart-symbols-location "$debug_info_dir" \
+    --android-mapping --android-mapping-location "$mapping_file" \
+  || { echo "datadog-ci upload failed"; return 1; }
+
+  mkdir -p "$archive_root"
+
+  if [ ! -d "$debug_info_dir" ]; then
+    echo "No debug-info folder found at $debug_info_dir"
+    return 1
+  fi
+
+  mv "$debug_info_dir" "$dest_dir"
+
+  if [ -f "$mapping_file" ]; then
+    cp "$mapping_file" "$dest_dir/"
+  else
+    echo "Warning: mapping.txt not found at $mapping_file"
+  fi
+
+  echo "Debug info archived to $dest_dir"
+
+  (
+    cd "$archive_root" || { echo "Failed to cd into $archive_root"; return 1; }
+    git add .
+    git commit -m "${service_name} - ${version}"
+    git push || echo "git push failed for ${service_name} - ${version}"
+  )
+}
+
+sb-patch() {
+  if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+    echo "Usage: sb-patch <version> <build_number> <service_name> [patch_number] [env=production] [track=staging]"
+    return 1
+  fi
+
+  local version="$1"
+  local build_number="$2"
+  local service_name="$3"
+  local patch_number="$4"
+  local env="${5:-production}"
+  local track="${6:-staging}"
+  local symbols_dir="build/debug-info-patch"
+
+  # clean up so symbols from an earlier patch can't mix with this one
+  rm -rf "$symbols_dir"
+
+  shorebird patch android \
+    --release-version="${version}+${build_number}" \
+    --track="$track" \
+    --dart-define-from-file=".env/${env}.json" \
+    -- --obfuscate --split-debug-info="$symbols_dir" \
+  && dd-upload-patch "$version" "$service_name" "$patch_number"
+}
+
+dd-upload-patch() {
+  if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Usage: dd-upload-patch <version> <service_name> [patch_number]"
+    return 1
+  fi
+
+  local version="$1"
+  local service_name="$2"
+  local patch_label="patch${3:-$(date +%Y%m%d-%H%M%S)}"
+  local debug_info_dir="./build/debug-info-patch"
+  local archive_root="$HOME/projects/customer_app_debug_info"
+  local dest_dir="$archive_root/${version}_${service_name}_${patch_label}"
+
+  if [ ! -d "$debug_info_dir" ]; then
+    echo "No patch debug-info folder found at $debug_info_dir"
+    return 1
+  fi
+
+  # Dart symbols only. No --android-mapping: patches don't change native code
+  datadog-ci flutter-symbols upload \
+    --service-name "$service_name" \
+    --version "$version" \
+    --dart-symbols-location "$debug_info_dir" \
+  || { echo "datadog-ci upload failed"; return 1; }
+
+  mkdir -p "$archive_root"
+  mv "$debug_info_dir" "$dest_dir"
+
+  echo "Patch debug info archived to $dest_dir"
+
+  (
+    cd "$archive_root" || { echo "Failed to cd into $archive_root"; return 1; }
+    git add .
+    git commit -m "${service_name} - ${version} (${patch_label})"
+    git push || echo "git push failed for ${service_name} - ${version} (${patch_label})"
+  )
+}
+
 # add chrome alias if in a WSL environment
 if which powershell.exe &>/dev/null; then
   alias chrome="/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe" 
